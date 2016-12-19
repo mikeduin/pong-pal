@@ -8,6 +8,8 @@ var session = require('cookie-session');
 var knex = require('./db/knex.js');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var jwt = require('jsonwebtoken');
+var expressJwt = require('express-jwt');
 require('dotenv').load();
 
 var routes = require('./routes/index');
@@ -33,16 +35,6 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/users', users);
 
-app.get('/login/facebook',
-  passport.authenticate('facebook', { scope: ['public_profile', 'email', 'user_hometown']})
-);
-
-app.get('/login/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-});
-
 passport.use('facebook', new FacebookStrategy({
     clientID : process.env.FB_APP_ID,
     clientSecret : process.env.FB_APP_SECRET,
@@ -61,23 +53,49 @@ passport.use('facebook', new FacebookStrategy({
           first_name: profile._json.first_name,
           last_name: profile._json.last_name,
           hometown: profile._json.hometown.name,
-          profile: profile._json.link,
+          fb_profile: profile._json.link,
           facebookId: profile.id,
           photo: profile.photos[0].value,
           superuser: false
         }, '*').then(function(user){
-          console.log('user created as ', user)
-          done(null, user[0])
+
+          user[0].token = jwt.sign({
+            _id: user[0]._id,
+            username: user[0].username
+          }, process.env.SESSION_KEY);
+
+          return done(null, user[0])
         });
+
       } else {
-        console.log('user is already found as ', user)
-        done(null, user)
+
+        facebookId = profile.id;
+        user.token = jwt.sign({
+          _id: user._id,
+          username: user.username
+        }, process.env.SESSION_KEY);
+
+        return done(null, user)
       }
     })
-
-    // return done(null, profile)
   }
 ));
+
+app.get('/login/facebook',
+  passport.authenticate('facebook', { scope: ['public_profile', 'email', 'user_hometown']})
+);
+
+app.get('/login/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    var token = req.user.token;
+    knex('users').first().where('facebookId', facebookId).then(function(user){
+      console.log('user returned to callback is ', user);
+      console.log('token is ', req.user.token);
+    });
+
+    res.redirect('/');
+});
 
 passport.serializeUser(function(user, done){
   done(null, user);

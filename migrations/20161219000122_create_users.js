@@ -7,8 +7,8 @@ exports.up = function(knex, Promise) {
     table.string('first_name');
     table.string('last_name');
     table.string('hometown');
-    table.string('profile');
-    table.string('facebookId');
+    table.string('fb_profile');
+    table.string('facebookId').unique();
     table.boolean('superuser');
     table.string('photo');
   })
