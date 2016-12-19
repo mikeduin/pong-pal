@@ -21,5 +21,20 @@ function siteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         },
       }
     })
+    .state('login', {
+      url: '/login',
+      views: {
+        'header' : {
+          templateUrl: 'views/navbar.html',
+          controller: 'NavController',
+          controllerAs: 'vm'
+        },
+        'content' : {
+          templateUrl: 'views/login.html',
+          controller: 'AuthController',
+          controllerAs: 'vm'
+        },
+      }
+    })
 
 }

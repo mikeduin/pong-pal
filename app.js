@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var knex = require('./db/knex.js');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+require('dotenv').load();
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +24,42 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/login/facebook',
+  passport.authenticate('facebook')
+);
+
+app.get('/login/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+passport.use('facebook', new FacebookStrategy({
+    clientID : process.env.FB_APP_ID,
+    clientSecret : process.env.FB_APP_SECRET,
+    callbackURL : 'http://localhost:3000/login/facebook/callback'
+  },
+
+  function(accessToken, refreshToken, profile, cb) {
+
+    console.log('profile is ', profile);
+    return cb(null, profile)
+  }
+
+));
+
+passport.serializeUser(function(user, cb){
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb){
+  cb(null, obj);
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
