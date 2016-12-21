@@ -21,7 +21,7 @@ a {
 /*TABLE STYLES*/
 #table {
   border: solid 3px black;
-  height: 240px;
+  height: 285px;
   border-radius: 10%;
   margin-top: 10px;
 }
@@ -31,41 +31,81 @@ a {
   border-left: 1px solid black
 }
 
+.config-start-left {
+  margin-left: -12px;
+}
+
+.config-start-right {
+  margin-right: 10px;
+}
+
 .cup {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   border-radius: 50%;
   border: solid 3px black;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
+  font-size: 24px;
 }
 
-.cup-back {
+.cup-left-back {
   margin-left: -10px;
 }
 
-.cup-back-top {
+.cup-left-back-top {
   margin-top: 20px;
   margin-left: -10px;
 }
 
-.cup-mid-back-top {
-  margin-top: 45px;
+.cup-left-mid-back-top {
+  margin-top: 50px;
+}
+
+.cup-left-mid-front-top {
+  margin-top: 80px;
+  margin-left: 10px;
+}
+
+.cup-left-mid-front {
+  margin-left: 10px;
+}
+
+.cup-left-front {
+  margin-top: 110px;
+  margin-left: 20px;
+}
+
+.cup-right-back {
   margin-left: -10px;
 }
 
-.cup-mid-front-top {
-  margin-top: 70px;
+.cup-right-back-top {
+  margin-top: 20px;
   margin-left: -10px;
 }
 
-.cup-front {
-  margin-left: -10px;
-  margin-top: 95px;
+.cup-right-mid-back-top {
+  margin-top: 50px;
+  margin-left: -23px
 }
 
-.cup-number {
-  font-weight: 600;
-  font-size: 24px;
+.cup-right-mid-back {
+  margin-left: -23px
+}
+
+.cup-right-mid-front-top {
+  margin-top: 80px;
+  margin-left: -35px;
+}
+
+.cup-right-mid-front {
+  margin-left: -35px;
+}
+
+.cup-right-front {
+  margin-top: 110px;
+  margin-left: -47px;
 }
