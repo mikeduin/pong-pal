@@ -4,10 +4,7 @@ a {
   color: #00B7FF;
 }
 
-/*#scorecard {
-  border-collapse: collapse;
-}*/
-
+/*SCORECARD STYLES*/
 #scorecard td {
   border: solid 1px black
 }
@@ -18,4 +15,57 @@ a {
 
 #divider td {
   background-color: black
+}
+
+
+/*TABLE STYLES*/
+#table {
+  border: solid 3px black;
+  height: 240px;
+  border-radius: 10%;
+  margin-top: 10px;
+}
+
+#table-right {
+  height: 99.9%;
+  border-left: 1px solid black
+}
+
+.cup {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: solid 3px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cup-back {
+  margin-left: -10px;
+}
+
+.cup-back-top {
+  margin-top: 20px;
+  margin-left: -10px;
+}
+
+.cup-mid-back-top {
+  margin-top: 45px;
+  margin-left: -10px;
+}
+
+.cup-mid-front-top {
+  margin-top: 70px;
+  margin-left: -10px;
+}
+
+.cup-front {
+  margin-left: -10px;
+  margin-top: 95px;
+}
+
+.cup-number {
+  font-weight: 600;
+  font-size: 24px;
 }

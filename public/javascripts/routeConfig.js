@@ -51,5 +51,20 @@ function siteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         },
       }
     })
+    .state('table', {
+      url: '/table',
+      views: {
+        'header' : {
+          templateUrl: 'views/navbar.html',
+          controller: 'NavController',
+          controllerAs: 'vm'
+        },
+        'content' : {
+          templateUrl: 'views/table.html',
+          controller: 'ScoreController',
+          controllerAs: 'vm'
+        },
+      }
+    })
 
 }
