@@ -43,12 +43,12 @@ passport.use('facebook', new FacebookStrategy({
   },
 
   function(accessToken, refreshToken, profile, done) {
-    knex('users').first().where('facebookId', profile.id).then(function(user){
+    var email = profile.emails[0].value;
+    var username = email.split('@')[0];
+    knex('users').first().where('email', email).then(function(user){
       if (!user) {
-        var email = profile.emails[0].value;
-        var username = email.split('@')[0];
         knex('users').insert({
-          email: profile.emails[0].value,
+          email: email,
           username: username,
           first_name: profile._json.first_name,
           last_name: profile._json.last_name,
@@ -88,13 +88,15 @@ app.get('/login/facebook',
 app.get('/login/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
+    // console.log('req is ', req);
     var token = req.user.token;
-    knex('users').first().where('facebookId', facebookId).then(function(user){
-      console.log('user returned to callback is ', user);
-      console.log('token is ', req.user.token);
-    });
+    console.log('token is ', token);
+    // knex('users').first().where('facebookId', facebookId).then(function(user){
+    //   console.log('user returned to callback is ', user);
+    //   console.log('token is ', req.user.token);
+    // });
 
-    res.redirect('/');
+    res.json({token: token})
 });
 
 passport.serializeUser(function(user, done){

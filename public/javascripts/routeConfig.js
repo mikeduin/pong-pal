@@ -36,5 +36,20 @@ function siteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         },
       }
     })
+    .state('game', {
+      url: '/game',
+      views: {
+        'header' : {
+          templateUrl: 'views/navbar.html',
+          controller: 'NavController',
+          controllerAs: 'vm'
+        },
+        'content' : {
+          templateUrl: 'views/scorecard.html',
+          controller: 'ScoreController',
+          controllerAs: 'vm'
+        },
+      }
+    })
 
 }
