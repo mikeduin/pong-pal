@@ -62,50 +62,55 @@ a {
 
 .cup-left-mid-back-top {
   margin-top: 50px;
+  margin-left: 8px;
+}
+
+.cup-left-mid-back {
+  margin-left: 8px;
 }
 
 .cup-left-mid-front-top {
   margin-top: 80px;
-  margin-left: 10px;
+  margin-left: 25px;
 }
 
 .cup-left-mid-front {
-  margin-left: 10px;
+  margin-left: 25px
 }
 
 .cup-left-front {
   margin-top: 110px;
-  margin-left: 20px;
+  margin-left: 42px;
 }
 
 .cup-right-back {
-  margin-left: -10px;
+  margin-left: -18px;
 }
 
 .cup-right-back-top {
   margin-top: 20px;
-  margin-left: -10px;
+  margin-left: -18px;
 }
 
 .cup-right-mid-back-top {
   margin-top: 50px;
-  margin-left: -23px
+  margin-left: -40px
 }
 
 .cup-right-mid-back {
-  margin-left: -23px
+  margin-left: -40px
 }
 
 .cup-right-mid-front-top {
   margin-top: 80px;
-  margin-left: -35px;
+  margin-left: -57px;
 }
 
 .cup-right-mid-front {
-  margin-left: -35px;
+  margin-left: -57px;
 }
 
 .cup-right-front {
   margin-top: 110px;
-  margin-left: -47px;
+  margin-left: -74px;
 }
