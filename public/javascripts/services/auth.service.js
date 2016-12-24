@@ -40,13 +40,15 @@ function authService ($http, $window) {
     }
   };
 
-  auth.logIn = function() {
-    $http.jsonp('/login/facebook').success(function(data){
-      console.log('data returned to login function is ', data)
-      return data;
-      // auth.saveToken(data.token)
+  auth.logIn = function(user) {
+    return $http.jsonp('/login/facebook')
+    .success(function(data){
+      auth.saveToken(data.token);
+      console.log('token saved');
+    }).error(function(response){
+      return(response)
     })
-  };
+  }
 
   auth.logOut = function() {
     $window.localStorage.removeItem('pong-token')

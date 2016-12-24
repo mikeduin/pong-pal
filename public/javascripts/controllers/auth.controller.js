@@ -8,11 +8,17 @@ function AuthController (authService) {
   var vm = this;
 
   vm.logIn = function() {
-    authService.logIn().error(function(error){
-      console.log('error in controller is ', error)
-      // vm.error = error.message
-    }).then(function(){
-      $state.go('home')
+    authService.logIn().success(function(data){
+      console.log(data)
+    }).error(function(error){
+      console.log('error is ', error)
     })
+    // .error(function(error){
+    //   console.log('error in controller is ', error)
+    //   // vm.error = error.message
+    // })
+    // .then(function(){
+    //   $state.go('home')
+    // })
   }
 }
