@@ -1,8 +1,22 @@
 <div class="row">
+  <div class="col s2 center-align">
+    <div ng-show="vm.activeTm === 1">
+      SHOOTING
+    </div>
+  </div>
+  <div class="col s2 offset-s8 center-align">
+    <div ng-show="vm.activeTm === 2">
+      SHOOTING
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col s2 left-team center-align">
-    TEAM NAME
+    TEAM #1
     <div class="player">
       Player 1
+      <button class="btn waves-effect waves-light miss-btn">MISS</button>
     </div>
     <div class="player">
       Player 2
@@ -12,7 +26,7 @@
     <div id="table">
       <div class="col s6" id="table-left">
         <div class="config-start-left">
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-left-back-top">
               7
             </div>
@@ -26,7 +40,7 @@
               10
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-left-mid-back-top">
               4
             </div>
@@ -37,7 +51,7 @@
               6
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-left-mid-front-top">
               2
             </div>
@@ -45,7 +59,7 @@
               3
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-left-front">
               1
             </div>
@@ -97,7 +111,7 @@
     </div>
   </div>
   <div class="col s2 left-team center-align">
-    TEAM NAME
+    TEAM #2
     <div class="player">
       Player 1
     </div>

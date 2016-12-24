@@ -35,6 +35,19 @@ a {
   margin-top: 20px
 }
 
+.miss-btn {
+  background-color: #B11C19;
+  border-radius: 10%;
+}
+
+.miss-btn:hover {
+  background-color: #DB251F
+}
+
+.miss-btn:focus {
+  background-color: #DB251F
+}
+
 .player {
   margin-top: 30px
 }
@@ -59,6 +72,12 @@ a {
   font-size: 24px;
 }
 
+.cup:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
 .cup-left-back {
   margin-left: -10px;
 }
@@ -70,25 +89,25 @@ a {
 
 .cup-left-mid-back-top {
   margin-top: 50px;
-  margin-left: 8px;
+  margin-left: -32px;
 }
 
 .cup-left-mid-back {
-  margin-left: 8px;
+  margin-left: -32px;
 }
 
 .cup-left-mid-front-top {
   margin-top: 80px;
-  margin-left: 25px;
+  margin-left: -32px;
 }
 
 .cup-left-mid-front {
-  margin-left: 25px
+  margin-left: -32px
 }
 
 .cup-left-front {
   margin-top: 110px;
-  margin-left: 42px;
+  margin-left: -32px;
 }
 
 .cup-right-back {
@@ -102,23 +121,23 @@ a {
 
 .cup-right-mid-back-top {
   margin-top: 50px;
-  margin-left: -40px
+  margin-left: -38px
 }
 
 .cup-right-mid-back {
-  margin-left: -40px
+  margin-left: -38px
 }
 
 .cup-right-mid-front-top {
   margin-top: 80px;
-  margin-left: -57px;
+  margin-left: -58px;
 }
 
 .cup-right-mid-front {
-  margin-left: -57px;
+  margin-left: -58px;
 }
 
 .cup-right-front {
   margin-top: 110px;
-  margin-left: -74px;
+  margin-left: -78px;
 }
