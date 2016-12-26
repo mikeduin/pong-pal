@@ -82,7 +82,7 @@ a {
   font-size: 24px;
 }
 
-.cup-disabled {
+.cup-disabled > div.col > div.cup {
   border: solid 3px #C9C2C2;
   color: #C9C2C2;
 }
