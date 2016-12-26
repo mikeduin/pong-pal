@@ -29,24 +29,24 @@
 <div class="row">
   <div class="col s2 left-team">
     TEAM #1
-      <button class="btn waves-effect waves-light btn-rerack">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTm === 2}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTm === 2}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTm === 2}">MISS</button>
       </div>
     </div>
   </div>
   <div class="col s8">
     <div id="table">
       <div class="col s6" id="table-left">
-        <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTm === 2}">
+        <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTm === 1}">
           <div class="col">
             <div class="cup cup-left-back-top" >
               7
@@ -88,7 +88,7 @@
         </div>
       </div>
       <div class ="col s6" id="table-right">
-        <div class="rack-right-default">
+        <div class="rack-right-default" ng-class="{'cup-disabled': vm.activeTm === 2}">
           <div class="col offset-s7">
             <div class="cup cup-right-front">
               1
@@ -133,17 +133,17 @@
   </div>
   <div class="col s2 left-team">
     TEAM #2
-      <button class="btn waves-effect waves-light btn-rerack">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTm === 1}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTm === 1}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTm === 1}">MISS</button>
       </div>
     </div>
   </div>
