@@ -12,20 +12,26 @@
 </div>
 
 <div class="row">
-  <div class="col s2 left-team center-align">
+  <div class="col s2 left-team">
     TEAM #1
+      <button class="btn waves-effect waves-light btn-rerack">RERACK</button>
     <div class="player">
       Player 1
-      <button class="btn waves-effect waves-light miss-btn">MISS</button>
+      <div>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)">MISS</button>
+      </div>
     </div>
     <div class="player">
       Player 2
+      <div>
+        <button class="btn waves-effect waves-light btn-miss">MISS</button>
+      </div>
     </div>
   </div>
   <div class="col s8">
     <div id="table">
       <div class="col s6" id="table-left">
-        <div class="config-start-left">
+        <div class="rack-left-default">
           <div class="col">
             <div class="cup cup-left-back-top">
               7
@@ -67,13 +73,13 @@
         </div>
       </div>
       <div class ="col s6" id="table-right">
-        <div class="config-start-right">
-          <div class="col s1 offset-s8">
+        <div class="rack-right-default">
+          <div class="col offset-s7">
             <div class="cup cup-right-front">
               1
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-right-mid-front-top">
               3
             </div>
@@ -81,7 +87,7 @@
               2
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-right-mid-back-top">
               6
             </div>
@@ -92,7 +98,7 @@
               4
             </div>
           </div>
-          <div class="col s1">
+          <div class="col">
             <div class="cup cup-right-back-top">
               10
             </div>
@@ -110,7 +116,7 @@
       </div>
     </div>
   </div>
-  <div class="col s2 left-team center-align">
+  <div class="col s2 left-team">
     TEAM #2
     <div class="player">
       Player 1

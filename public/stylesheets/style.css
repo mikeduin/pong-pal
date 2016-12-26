@@ -28,36 +28,46 @@ a {
 
 #table-right {
   height: 99.9%;
-  border-left: 1px solid black
+  border-left: 1px solid black;
 }
 
 .left-team {
-  margin-top: 20px
+  margin-top: 20px;
+  text-align: center;
 }
 
-.miss-btn {
+.btn-miss {
   background-color: #B11C19;
   border-radius: 10%;
 }
 
-.miss-btn:hover {
+.btn-miss:hover {
   background-color: #DB251F
 }
 
-.miss-btn:focus {
+.btn-miss:focus {
   background-color: #DB251F
+}
+
+.btn-rerack {
+  background-color: #7099E2;
+  width: 110px;
+}
+
+.btn-spill {
+  width: 110px;
 }
 
 .player {
-  margin-top: 30px
+  margin-top: 30px;
 }
 
-.config-start-left {
+.rack-left-default {
   margin-left: -12px;
 }
 
-.config-start-right {
-  margin-right: 10px;
+.rack-right-default {
+  margin-right: -50px;
 }
 
 .cup {
@@ -111,33 +121,33 @@ a {
 }
 
 .cup-right-back {
-  margin-left: -18px;
+  margin-left: -32px;
 }
 
 .cup-right-back-top {
   margin-top: 20px;
-  margin-left: -18px;
+  margin-left: -32px;
 }
 
 .cup-right-mid-back-top {
   margin-top: 50px;
-  margin-left: -38px
+  margin-left: -60px
 }
 
 .cup-right-mid-back {
-  margin-left: -38px
+  margin-left: -60px
 }
 
 .cup-right-mid-front-top {
   margin-top: 80px;
-  margin-left: -58px;
+  margin-left: -90px;
 }
 
 .cup-right-mid-front {
-  margin-left: -58px;
+  margin-left: -90px;
 }
 
 .cup-right-front {
   margin-top: 110px;
-  margin-left: -78px;
+  margin-left: -117px;
 }
