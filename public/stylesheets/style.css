@@ -82,6 +82,11 @@ a {
   font-size: 24px;
 }
 
+.cup-disabled {
+  border: solid 3px #C9C2C2;
+  color: #C9C2C2;
+}
+
 .cup:hover {
   background-color: black;
   color: white;
