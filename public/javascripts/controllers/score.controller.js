@@ -8,20 +8,20 @@ function ScoreController () {
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
-    $('#modal1').modal('open');
+    $('#start-modal').modal('open');
   });
 
   $('.modal').modal({
     dismissible: false,
-    in_duration: 1000,
-    out_duration: 500
-  })
+    in_duration: 400,
+    out_duration: 200
+  });
 
   vm.frames = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   vm.activeTm;
   vm.turnShots = 0;
-  vm.frameShots = 0;
-  vm.activeFrame = 1;
+  vm.t1frame = 1;
+  vm.t2frame = 1;
   vm.t1activeRack = '10-cup';
   vm.t2activeRack = '10-cup';
   vm.t1cupsAvail = 10;
@@ -48,22 +48,43 @@ function ScoreController () {
       result: 'miss'
     });
 
-    if (vm.frameShots === 3) {
-      vm.frameShots = 0;
-      vm.activeFrame++;
-      vm.turnShots = 0;
-      team === 1 ? vm.activeTm = 2 : vm.activeTm = 1;
-    } else if (vm.frameShots === 2) {
-      vm.frameShots++;
-      vm.turnShots++;
-    } else if (vm.frameShots === 1) {
-      vm.frameShots++;
-      vm.turnShots = 0;
-      team === 1 ? vm.activeTm = 2 : vm.activeTm = 1;
-    } else {
-      vm.frameShots++;
-      vm.turnShots++
-    }
+  //   if (vm.frameShots === 3) {
+  //     vm.frameShots = 0;
+  //     vm.activeFrame++;
+  //     vm.turnShots = 0;
+  //     team === 1 ? vm.activeTm = 2 : vm.activeTm = 1;
+  //   } else if (vm.frameShots === 2) {
+  //     vm.frameShots++;
+  //     vm.turnShots++;
+  //   } else if (vm.frameShots === 1) {
+  //     vm.frameShots++;
+  //     vm.turnShots = 0;
+  //     team === 1 ? vm.activeTm = 2 : vm.activeTm = 1;
+  //   } else {
+  //     vm.frameShots++;
+  //     vm.turnShots++
+  //   }
   };
+
+  vm.madeCup = function(cup) {
+    vm.activeCup = parseInt(cup.substring(1));
+    console.log('activeCup is ', vm.activeCup);
+    $('#splash-modal').modal('open');
+  }
+
+  vm.closeModal = function() {
+    $('#splash-modal').modal('close');
+  }
+
+  vm.splash = function(team, player, cup) {
+    var pArray = eval('vm.t' + team + 'p' + player + 'shots');
+    if (team === 1) {
+      var cupsAvail = vm.t1cupsAvail;
+      var rack = vm.t1activeRack;
+    } else {
+      var cupsAvail = vm.t2cupsAvail;
+      var rack = vm.t2activeRack;
+    };
+  }
 
 }

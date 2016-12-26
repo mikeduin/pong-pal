@@ -58,6 +58,29 @@ a {
   width: 110px;
 }
 
+.btn-splash {
+  display: inline;
+  background-color: #E8E8E8;
+  color: black;
+  margin-left: 10px;
+}
+
+.splash-header {
+  border-bottom: solid 1px #6D6D6D;
+  padding-bottom: 5px;
+  font-size: 24px;
+}
+
+.splash-x {
+  background-color: #B11C19;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.modal-span {
+  font-size: 24px;
+}
+
 .player {
   margin-top: 30px;
 }
