@@ -24,7 +24,7 @@
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)">MISS</button>
       </div>
     </div>
   </div>
@@ -118,11 +118,25 @@
   </div>
   <div class="col s2 left-team">
     TEAM #2
+      <button class="btn waves-effect waves-light btn-rerack">RERACK</button>
     <div class="player">
       Player 1
+      <div>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)">MISS</button>
+      </div>
     </div>
     <div class="player">
       Player 2
+      <div>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)">MISS</button>
+      </div>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12 center-align">
+    Frame: {{vm.activeFrame}} ... Team: {{vm.activeTm}} ... Turn Shots: {{vm.turnShots}} ... Frame Shots: {{vm.frameShots}}
+
   </div>
 </div>
