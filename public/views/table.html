@@ -3,8 +3,8 @@
     <h4>Who shoots first?</h4>
     <div class="row">
       <div class="col s12 center-align">
-        <button class="btn modal-close waves-effect" ng-click="vm.activeTm = 1">Team 1</button>
-        <button class="btn modal-close waves-effect" ng-click="vm.activeTm = 2">Team 2</button>
+        <button class="btn modal-close waves-effect" ng-click="vm.activeTeam = 1">Team 1</button>
+        <button class="btn modal-close waves-effect" ng-click="vm.activeTeam = 2">Team 2</button>
       </div>
     </div>
   </div>
@@ -28,23 +28,23 @@
     </div>
     <div class="row vert-ctr">
       <span class="modal-span">WHO MADE THIS SHOT?</span>
-      <button class="btn waves-effect btn-splash">Player 1</button>
-      <button class="btn waves-effect btn-splash">Player 2</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 1" ng-class="{'btn-selected': vm.shotMaker === 1, 'disabled': vm.shotResult === 'spill'}">Player 1</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill'}">Player 2</button>
     </div>
     <div class="row center-align subm-row">
-      <button class="btn waves-effect btn-submit">SUBMIT</button>
+      <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
     </div>
   </div>
 </div>
 
 <div class="row">
   <div class="col s2 center-align">
-    <div ng-show="vm.activeTm === 1">
+    <div ng-show="vm.activeTeam === 1">
       SHOOTING
     </div>
   </div>
   <div class="col s2 offset-s8 center-align">
-    <div ng-show="vm.activeTm === 2">
+    <div ng-show="vm.activeTeam === 2">
       SHOOTING
     </div>
   </div>
@@ -53,66 +53,66 @@
 <div class="row">
   <div class="col s2 left-team">
     TEAM #1
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTm === 2}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTm === 2}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTeam === 2}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTm === 2}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTeam === 2}">MISS</button>
       </div>
     </div>
   </div>
   <div class="col s8">
     <div id="table">
       <div class="col s6" id="table-left">
-        <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTm === 1}">
+        <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTeam === 1}">
           <div class="col">
-            <div class="cup cup-left-back-top" ng-hide="vm.hide-l7"  ng-click="vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7'}">
+            <div class="cup cup-left-back-top" ng-click="vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'hidden': vm.showCups['l7'] === false}">
               7
             </div>
-            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l8'}">
+            <div class="cup cup-left-back" ng-click="vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'hidden': vm.showCups['l8'] === false}">
               8
             </div>
-            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l9'}">
+            <div class="cup cup-left-back" ng-click="vm.splashModal('l9')" ng-class="{'cup-active': vm.activeCup === 'l9', 'hidden': vm.showCups['l9'] === false}">
               9
             </div>
-            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l10'}">
+            <div class="cup cup-left-back" ng-click="vm.splashModal('l10')" ng-class="{'cup-active': vm.activeCup === 'l10', 'hidden': vm.showCups['l10'] === false}">
               10
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-back-top" ng-class="{'cup-active': vm.activeCup === 'l4'}">
+            <div class="cup cup-left-mid-back-top" ng-click="vm.splashModal('l4')" ng-class="{'cup-active': vm.activeCup === 'l4', 'hidden': vm.showCups['l4'] === false}">
               4
             </div>
-            <div class="cup cup-left-mid-back" ng-class="{'cup-active': vm.activeCup === 'l5'}">
+            <div class="cup cup-left-mid-back" ng-click="vm.splashModal('l5')" ng-class="{'cup-active': vm.activeCup === 'l5', 'hidden': vm.showCups['l5'] === false}">
               5
             </div>
-            <div class="cup cup-left-mid-back" ng-class="{'cup-active': vm.activeCup === 'l6'}">
+            <div class="cup cup-left-mid-back" ng-click="vm.splashModal('l6')" ng-class="{'cup-active': vm.activeCup === 'l6', 'hidden': vm.showCups['l6'] === false}">
               6
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-front-top" ng-class="{'cup-active': vm.activeCup === 'l2'}">
+            <div class="cup cup-left-mid-front-top" ng-click="vm.splashModal('l2')" ng-class="{'cup-active': vm.activeCup === 'l2', 'hidden': vm.showCups['l2'] === false}">
               2
             </div>
-            <div class="cup cup-left-mid-front" ng-class="{'cup-active': vm.activeCup === 'l3'}">
+            <div class="cup cup-left-mid-front" ng-click="vm.splashModal('l3')" ng-class="{'cup-active': vm.activeCup === 'l3', 'hidden': vm.showCups['l3'] === false}">
               3
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-front" ng-class="{'cup-active': vm.activeCup === 'l1'}">
+            <div class="cup cup-left-front" ng-click="vm.splashModal('l1')" ng-class="{'cup-active': vm.activeCup === 'l1', 'hidden': vm.showCups['l1'] === false}">
               1
             </div>
           </div>
         </div>
       </div>
       <div class ="col s6" id="table-right">
-        <div class="rack-right-default" ng-class="{'cup-disabled': vm.activeTm === 2}">
+        <div class="rack-right-default" ng-class="{'cup-disabled': vm.activeTeam === 2}">
           <div class="col offset-s7">
             <div class="cup cup-right-front">
               1
@@ -157,17 +157,17 @@
   </div>
   <div class="col s2 left-team">
     TEAM #2
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTm === 1}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 1}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTm === 1}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTeam === 1}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTm === 1}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTeam === 1}">MISS</button>
       </div>
     </div>
   </div>
@@ -175,6 +175,6 @@
 
 <div class="row">
   <div class="col s12 center-align">
-    Frame: {{vm.activeFrame}} ... Team: {{vm.activeTm}} ... Turn Shots: {{vm.turnShots}} ... Frame Shots: {{vm.frameShots}}
+    Frame: {{vm.activeFrame}} ... Team: {{vm.activeTeam}} ... Turn Shots: {{vm.turnShots}} ... Frame Shots: {{vm.frameShots}}
   </div>
 </div>
