@@ -20,16 +20,19 @@
         <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
       </span>
     </div>
-    <div class="row">
+    <div class="row vert-ctr">
       <span class="modal-span">SPLASH METHOD</span>
-      <button class="btn waves-effect btn-splash">Shot</button>
-      <button class="btn waves-effect btn-splash">Bounce</button>
-      <button class="btn waves-effect btn-splash">Spill</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'shot'" ng-class="{'btn-selected': vm.shotResult === 'shot'}">Shot</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'bounce'" ng-class="{'btn-selected': vm.shotResult === 'bounce'}">Bounce</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'spill'" ng-class="{'btn-selected': vm.shotResult === 'spill'}">Spill</button>
     </div>
-    <div class="row">
+    <div class="row vert-ctr">
       <span class="modal-span">WHO MADE THIS SHOT?</span>
       <button class="btn waves-effect btn-splash">Player 1</button>
       <button class="btn waves-effect btn-splash">Player 2</button>
+    </div>
+    <div class="row center-align subm-row">
+      <button class="btn waves-effect btn-submit">SUBMIT</button>
     </div>
   </div>
 </div>
@@ -69,40 +72,40 @@
       <div class="col s6" id="table-left">
         <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTm === 1}">
           <div class="col">
-            <div class="cup cup-left-back-top" ng-hide="vm.hide-l7"  ng-click="vm.madeCup('l7')">
+            <div class="cup cup-left-back-top" ng-hide="vm.hide-l7"  ng-click="vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7'}">
               7
             </div>
-            <div class="cup cup-left-back">
+            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l8'}">
               8
             </div>
-            <div class="cup cup-left-back">
+            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l9'}">
               9
             </div>
-            <div class="cup cup-left-back">
+            <div class="cup cup-left-back" ng-class="{'cup-active': vm.activeCup === 'l10'}">
               10
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-back-top">
+            <div class="cup cup-left-mid-back-top" ng-class="{'cup-active': vm.activeCup === 'l4'}">
               4
             </div>
-            <div class="cup cup-left-mid-back">
+            <div class="cup cup-left-mid-back" ng-class="{'cup-active': vm.activeCup === 'l5'}">
               5
             </div>
-            <div class="cup cup-left-mid-back">
+            <div class="cup cup-left-mid-back" ng-class="{'cup-active': vm.activeCup === 'l6'}">
               6
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-front-top">
+            <div class="cup cup-left-mid-front-top" ng-class="{'cup-active': vm.activeCup === 'l2'}">
               2
             </div>
-            <div class="cup cup-left-mid-front">
+            <div class="cup cup-left-mid-front" ng-class="{'cup-active': vm.activeCup === 'l3'}">
               3
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-front">
+            <div class="cup cup-left-front" ng-class="{'cup-active': vm.activeCup === 'l1'}">
               1
             </div>
           </div>
