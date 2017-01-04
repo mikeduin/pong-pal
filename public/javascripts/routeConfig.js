@@ -45,22 +45,37 @@ function siteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
           controllerAs: 'vm'
         },
         'content' : {
+          templateUrl: 'views/game.html',
+          controller: 'ScoreController',
+          controllerAs: 'vm'
+        },
+      }
+    })
+    .state('game.table', {
+      url: '/table',
+      views: {
+        'table@game' : {
+          templateUrl: 'views/table.html',
+          controller: 'ScoreController',
+          controllerAs: 'vm'
+        },
+      }
+    })
+    .state('game.scorecard', {
+      url: '/scorecard',
+      views: {
+        'table@game' : {
           templateUrl: 'views/scorecard.html',
           controller: 'ScoreController',
           controllerAs: 'vm'
         },
       }
     })
-    .state('table', {
-      url: '/table',
+    .state('game.stats', {
+      url: '/stats',
       views: {
-        'header' : {
-          templateUrl: 'views/navbar.html',
-          controller: 'NavController',
-          controllerAs: 'vm'
-        },
-        'content' : {
-          templateUrl: 'views/table.html',
+        'stats@game' : {
+          templateUrl: 'views/stats.html',
           controller: 'ScoreController',
           controllerAs: 'vm'
         },

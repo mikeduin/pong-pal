@@ -4,6 +4,20 @@ a {
   color: #00B7FF;
 }
 
+/*GAME STYLES*/
+.game-tabs {
+  border-bottom: solid 1px black;
+  height: 40px;
+  padding: 0px;
+}
+
+.game-tabs > .col {
+  border-right: solid 1px black;
+  height: 40px;
+  padding: 0px;
+  margin: 0px;
+}
+
 /*SCORECARD STYLES*/
 #scorecard td {
   border: solid 1px black

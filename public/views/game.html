@@ -1,1 +1,17 @@
-<div class=""> </div>
+<div class="row">
+  <div class="col s12 game-tabs">
+    <a class="col s4" ui-sref="game.table">
+      TABLE
+    </a>
+    <a class="col s4" ui-sref="game.scorecard">
+      SCORECARD
+    </a>
+    <a class="col s4" ui-sref="game.stats">
+      STATS
+    </a>
+  </div>
+</div>
+
+<div ui-view="table"></div>
+<div ui-view="scorecard"></div>
+<div ui-view="stats"></div>
