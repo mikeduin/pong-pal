@@ -8,13 +8,14 @@ a {
 .game-tabs {
   border-bottom: solid 1px black;
   height: 40px;
-  padding: 0px;
+  /*padding-right: 0px;*/
+  width: 100%;
 }
 
 .game-tabs > .col {
   border-right: solid 1px black;
   height: 40px;
-  padding: 0px;
+  padding: 0 0 0 0;
   margin: 0px;
 }
 

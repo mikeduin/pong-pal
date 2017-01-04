@@ -158,9 +158,24 @@ function ScoreController () {
       vm.turnShots++;
       vm.activeCup = cup;
     } else {
-      vm.turnShots = 0;
-      vm.activeCup = null;
-      vm.showCups[cup] = false;
+      if (modifier === 'double') {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.showCups[vm.activeCup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 2 : vm.t2cupsAvail -= 2;
+      } else if (modifier === 'same') {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.showCups[vm.activeCup] = false;
+        vm.activeCup = null;
+      } else {
+        vm.turnShots = 0;
+        vm.activeCup = null;
+        vm.showCups[cup] = false;
+        vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+      }
     };
 
     $('#splash-modal').modal('close');
