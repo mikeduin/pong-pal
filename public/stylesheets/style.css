@@ -46,6 +46,10 @@ a {
   border-left: 1px solid black;
 }
 
+.msg-display {
+  text-align: center;
+}
+
 .left-team {
   margin-top: 20px;
   text-align: center;

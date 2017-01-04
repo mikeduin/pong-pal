@@ -32,7 +32,7 @@
       <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill'}">Player 2</button>
     </div>
     <div class="row center-align subm-row">
-      <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
+      <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
     </div>
   </div>
 </div>
@@ -43,7 +43,10 @@
       SHOOTING
     </div>
   </div>
-  <div class="col s2 offset-s8 center-align">
+  <div class="col s8 msg-display">
+    messages go here
+  </div>
+  <div class="col s2 center-align">
     <div ng-show="vm.activeTeam === 2">
       SHOOTING
     </div>
@@ -53,17 +56,17 @@
 <div class="row">
   <div class="col s2 left-team">
     TEAM #1
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t1p1'}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTeam === 2}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2'}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTeam === 2}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p1'}">MISS</button>
       </div>
     </div>
   </div>
@@ -157,17 +160,17 @@
   </div>
   <div class="col s2 left-team">
     TEAM #2
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 1}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2' || vm.activeShooter === 'vm.t2p1'}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTeam === 1}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2'}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTeam === 1}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p1'}">MISS</button>
       </div>
     </div>
   </div>

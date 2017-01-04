@@ -117,7 +117,15 @@ function ScoreController () {
     $('#splash-modal').modal('close');
   }
 
-  vm.splash = function(team, player, cup) {
+  vm.splash = function(team, result, player, cup) {
+    if (result === 'spill') {
+      vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+      vm.showCups[cup] = false;
+      $('#splash-modal').modal('close');
+      vm.shotResult = null;
+      return;
+    };
+
     var pArray = eval('vm.t' + team + 'p' + player + 'shots');
     console.log('pArray is ', pArray);
     if (vm.activeCup !== null) {
