@@ -35,15 +35,16 @@ function ScoreController () {
   vm.t2p2shots = [];
   vm.bonusCupArray = [];
   var doubleOpp = false;
+  var modifier = null;
 
-  vm.miss = function (team, player) {
-    var pArray = eval('vm.t' + team + 'p' + player + 'shots');
+  vm.miss = function (player) {
+    var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
     console.log('pArray is ', pArray);
     if (vm.activeCup !== null) {
       doubleOpp = true;
     };
 
-    if (team === 1) {
+    if (vm.activeTeam === 1) {
       var cupsAvail = vm.t1cupsAvail;
       var rack = vm.t1activeRack;
       var frame = vm.t1frame;
@@ -153,15 +154,23 @@ function ScoreController () {
     for (var i=0; i<vm.bonusCupArray.length; i++) {
       vm.showCups[vm.bonusCupArray[i]] = false;
     };
+
     if (vm.activeTeam === 1) {
       vm.t1cupsAvail -= vm.bonusCupArray.length;
     } else {
       vm.t2cupsAvail -= vm.bonusCupArray.length;
     };
+
+    if (modifier !== 'same' && modifier !== 'double') {
+      vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
+    };
     vm.bonusCupArray = [];
+    vm.bonusActive = false;
+    modifier = null;
+    vm.msg = null;
   }
 
-  vm.splash = function(team, result, player, cup) {
+  vm.splash = function(result, player, cup) {
     if (result === 'spill') {
       vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
       vm.showCups[cup] = false;
@@ -170,21 +179,21 @@ function ScoreController () {
       return;
     };
 
-    var pArray = eval('vm.t' + team + 'p' + player + 'shots');
+    var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
     console.log('pArray is ', pArray);
     if (vm.activeCup !== null) {
       doubleOpp = true;
     };
 
     if (cup === vm.activeCup) {
-      var modifier = 'same'
+      modifier = 'same';
     } else if (vm.activeCup !== null) {
-      var modifier = 'double'
+      modifier = 'double';
     } else {
-      var modifier = null
+      modifier = null;
     };
 
-    if (team === 1) {
+    if (vm.activeTeam === 1) {
       var cupsAvail = vm.t1cupsAvail;
       var rack = vm.t1activeRack;
       var frame = vm.t1frame;
@@ -221,15 +230,16 @@ function ScoreController () {
         vm.activeCup = null;
         vm.activeTeam === 1 ? vm.t1cupsAvail -= 2 : vm.t2cupsAvail -= 2;
         vm.activeShooter = null;
+        vm.msg = "Team " + vm.activeTeam + " hit double cups! They get balls back.";
       } else if (modifier === 'same') {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
         vm.showCups[vm.activeCup] = false;
         vm.activeCup = null;
-        vm.bonusPull = true;
+        vm.bonusActive = true;
         vm.activeShooter = null;
         vm.bonusToPull = 2;
-        vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
+        vm.msg = "A successful same-cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
       } else {
         vm.turnShots = 0;
         vm.activeCup = null;

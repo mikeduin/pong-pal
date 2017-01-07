@@ -24,7 +24,7 @@
 
 <div id="splash-modal" class="modal">
   <div class="modal-content">
-    <!-- <div ng-show="!vm.bonusPull"> -->
+    <!-- <div ng-show="!vm.bonusActive"> -->
       <div class="row splash-header center-align">
         <span class="col s10">
           Team x's Cup {{vm.splashedCup}} has been hit!
@@ -45,7 +45,7 @@
         <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1'}">Player 2</button>
       </div>
       <div class="row center-align subm-row">
-        <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
+        <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
       </div>
   </div>
 </div>
@@ -69,17 +69,17 @@
 <div class="row">
   <div class="col s2 left-team">
     TEAM #1
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t1p1'}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t1p1' || vm.bonusActive}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 1)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2'}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.bonusActive}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1, 2)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p1'}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2)" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p1' || vm.bonusActive}">MISS</button>
       </div>
     </div>
   </div>
@@ -88,40 +88,40 @@
       <div class="col s6" id="table-left">
         <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTeam === 1}">
           <div class="col">
-            <div class="cup cup-left-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l7') : vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'cup-bonus': vm.bonusCups['l7'], 'hidden': vm.showCups['l7'] === false}">
+            <div class="cup cup-left-back-top" ng-click="vm.bonusActive ? vm.bonusCup('l7') : vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'cup-bonus': vm.bonusCups['l7'], 'hidden': vm.showCups['l7'] === false}">
               7
             </div>
-            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l8') : vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'cup-bonus': vm.bonusCups['l8'], 'hidden': vm.showCups['l8'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusActive ? vm.bonusCup('l8') : vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'cup-bonus': vm.bonusCups['l8'], 'hidden': vm.showCups['l8'] === false}">
               8
             </div>
-            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l9') : vm.splashModal('l9')" ng-class="{'cup-active': vm.activeCup === 'l9', 'cup-bonus': vm.bonusCups['l9'], 'hidden': vm.showCups['l9'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusActive ? vm.bonusCup('l9') : vm.splashModal('l9')" ng-class="{'cup-active': vm.activeCup === 'l9', 'cup-bonus': vm.bonusCups['l9'], 'hidden': vm.showCups['l9'] === false}">
               9
             </div>
-            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l10') : vm.splashModal('l10')" ng-class="{'cup-active': vm.activeCup === 'l10', 'cup-bonus': vm.bonusCups['l10'], 'hidden': vm.showCups['l10'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusActive ? vm.bonusCup('l10') : vm.splashModal('l10')" ng-class="{'cup-active': vm.activeCup === 'l10', 'cup-bonus': vm.bonusCups['l10'], 'hidden': vm.showCups['l10'] === false}">
               10
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l4') : vm.splashModal('l4')" ng-class="{'cup-active': vm.activeCup === 'l4', 'cup-bonus': vm.bonusCups['l4'], 'hidden': vm.showCups['l4'] === false}">
+            <div class="cup cup-left-mid-back-top" ng-click="vm.bonusActive ? vm.bonusCup('l4') : vm.splashModal('l4')" ng-class="{'cup-active': vm.activeCup === 'l4', 'cup-bonus': vm.bonusCups['l4'], 'hidden': vm.showCups['l4'] === false}">
               4
             </div>
-            <div class="cup cup-left-mid-back" ng-click="vm.bonusPull ? vm.bonusCup('l5') : vm.splashModal('l5')" ng-class="{'cup-active': vm.activeCup === 'l5', 'cup-bonus': vm.bonusCups['l5'], 'hidden': vm.showCups['l5'] === false}">
+            <div class="cup cup-left-mid-back" ng-click="vm.bonusActive ? vm.bonusCup('l5') : vm.splashModal('l5')" ng-class="{'cup-active': vm.activeCup === 'l5', 'cup-bonus': vm.bonusCups['l5'], 'hidden': vm.showCups['l5'] === false}">
               5
             </div>
-            <div class="cup cup-left-mid-back" ng-click="vm.bonusPull ? vm.bonusCup('l6') : vm.splashModal('l6')" ng-class="{'cup-active': vm.activeCup === 'l6', 'cup-bonus': vm.bonusCups['l6'], 'hidden': vm.showCups['l6'] === false}">
+            <div class="cup cup-left-mid-back" ng-click="vm.bonusActive ? vm.bonusCup('l6') : vm.splashModal('l6')" ng-class="{'cup-active': vm.activeCup === 'l6', 'cup-bonus': vm.bonusCups['l6'], 'hidden': vm.showCups['l6'] === false}">
               6
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-front-top" ng-click="vm.bonusPull ? vm.bonusCup('l2') : vm.splashModal('l2')" ng-class="{'cup-active': vm.activeCup === 'l2', 'cup-bonus': vm.bonusCups['l2'], 'hidden': vm.showCups['l2'] === false}">
+            <div class="cup cup-left-mid-front-top" ng-click="vm.bonusActive ? vm.bonusCup('l2') : vm.splashModal('l2')" ng-class="{'cup-active': vm.activeCup === 'l2', 'cup-bonus': vm.bonusCups['l2'], 'hidden': vm.showCups['l2'] === false}">
               2
             </div>
-            <div class="cup cup-left-mid-front" ng-click="vm.bonusPull ? vm.bonusCup('l3') : vm.splashModal('l3')" ng-class="{'cup-active': vm.activeCup === 'l3', 'cup-bonus': vm.bonusCups['l3'], 'hidden': vm.showCups['l3'] === false}">
+            <div class="cup cup-left-mid-front" ng-click="vm.bonusActive ? vm.bonusCup('l3') : vm.splashModal('l3')" ng-class="{'cup-active': vm.activeCup === 'l3', 'cup-bonus': vm.bonusCups['l3'], 'hidden': vm.showCups['l3'] === false}">
               3
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-front" ng-click="vm.bonusPull ? vm.bonusCup('l1') : vm.splashModal('l1')" ng-class="{'cup-active': vm.activeCup === 'l1', 'cup-bonus': vm.bonusCups['l1'], 'hidden': vm.showCups['l1'] === false}">
+            <div class="cup cup-left-front" ng-click="vm.bonusActive ? vm.bonusCup('l1') : vm.splashModal('l1')" ng-class="{'cup-active': vm.activeCup === 'l1', 'cup-bonus': vm.bonusCups['l1'], 'hidden': vm.showCups['l1'] === false}">
               1
             </div>
           </div>
@@ -173,17 +173,17 @@
   </div>
   <div class="col s2 left-team">
     TEAM #2
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2' || vm.activeShooter === 'vm.t2p1'}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2' || vm.activeShooter === 'vm.t2p1' || vm.bonusActive}">RERACK</button>
     <div class="player">
       Player 1
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 1)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2'}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(1)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p2' || vm.bonusActive}">MISS</button>
       </div>
     </div>
     <div class="player">
       Player 2
       <div>
-        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2, 2)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p1'}">MISS</button>
+        <button class="btn waves-effect waves-light btn-miss" ng-click="vm.miss(2)" ng-class="{'disabled': vm.activeTeam === 1 || vm.activeShooter === 'vm.t2p1' || vm.bonusActive}">MISS</button>
       </div>
     </div>
   </div>
