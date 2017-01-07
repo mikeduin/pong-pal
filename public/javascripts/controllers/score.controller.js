@@ -111,6 +111,12 @@ function ScoreController () {
 
   vm.splashModal = function(cup) {
     vm.splashedCup = cup;
+    if (vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1') {
+      vm.shotMaker = 1;
+    };
+    if (vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t2p2') {
+      vm.shotMaker = 2;
+    };
     $('#splash-modal').modal('open');
   };
 
