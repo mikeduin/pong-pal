@@ -12,7 +12,7 @@
 
 <div id="bonus-modal" class="modal">
   <div class="modal-content">
-    <h4>{{vm.bonusMsg}}</h4>
+    <h4> Pull <ng-pluralize count="vm.bonusCupArray.length" when="{'1': 'cup', 'other': 'cups'}"></ng-pluralize> {{vm.bonusMsg}}</h4>
     <div class="row">
       <div class="col s12 center-align">
         <button class="btn modal-close waves-effect" ng-click="vm.confirmBonus()">CONFIRM</button>
@@ -55,6 +55,7 @@
     <div ng-show="vm.activeTeam === 1">
       SHOOTING
     </div>
+    Cups Avail: {{vm.t1cupsAvail}}
   </div>
   <div class="col s8 msg-display">
     {{vm.msg}}
@@ -63,6 +64,7 @@
     <div ng-show="vm.activeTeam === 2">
       SHOOTING
     </div>
+    Cups Avail: {{vm.t2cupsAvail}}
   </div>
 </div>
 

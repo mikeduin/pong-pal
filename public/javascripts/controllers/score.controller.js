@@ -36,6 +36,7 @@ function ScoreController () {
   vm.bonusCupArray = [];
   var doubleOpp = false;
   var modifier = null;
+  var bounceMod = null;
 
   vm.miss = function (player) {
     var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
@@ -67,22 +68,26 @@ function ScoreController () {
     console.log(pArray);
 
     if (vm.turnShots === 0) {
+      vm.turnShots++;
       if (player === 1) {
-        vm.activeShooter = 'vm.t' + team + 'p2'
+        vm.activeShooter = 'vm.t' + vm.activeTeam + 'p2'
       } else {
-        vm.activeShooter = 'vm.t' + team + 'p1'
+        vm.activeShooter = 'vm.t' + vm.activeTeam + 'p1'
       };
     } else {
-      vm.activeShooter = null;
-    };
-
-    if (vm.turnShots === 0) {
-      vm.turnShots++;
-    } else {
       vm.turnShots = 0;
-      vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
+      vm.activeShooter = null;
+      console.log('vm active cup is ', vm.activeCup);
       if (vm.activeCup) {
         vm.showCups[vm.activeCup] = false;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+      };
+      if (bounceMod) {
+        vm.bonusActive = true;
+        vm.bonusToPull = 1;
+        vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce."
+      } else {
+        vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
       }
     };
 
@@ -107,69 +112,6 @@ function ScoreController () {
     $('#splash-modal').modal('close');
   };
 
-  vm.bonusCup = function(cup) {
-    if (vm.bonusCups[cup] !== true) {
-      vm.bonusCups[cup] = true;
-      vm.bonusCupArray.push(cup);
-    } else {
-      var cupIndex = vm.bonusCupArray.indexOf(cup);
-      vm.bonusCupArray.splice(cupIndex, 1);
-      vm.bonusCups[cup] = false;
-    };
-
-    console.log('vm.bonusCupCount is ', vm.bonusCupArray.length);
-    console.log(vm.bonusCupArray);
-
-    if (vm.bonusCupArray.length === vm.bonusToPull) {
-      vm.bonusMsg = 'Pull cups ';
-      for (var i=0; i<vm.bonusCupArray.length; i++){
-        if (i < vm.bonusCupArray.length-1) {
-          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + ' and ';
-        } else {
-          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + '?';
-        };
-      };
-      $('#bonus-modal').modal('open');
-    };
-
-    if (vm.bonusCupArray.length > vm.bonusToPull) {
-      vm.msg = "You've selected too many cups; you can only pull " + vm.bonusToPull + " cups. Please de-select cups."
-    } else {
-      vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn."
-    }
-
-    // vm.bonusCup1 === undefined ? vm.bonusCup1 = cup : vm.bonusCup2 = cup;
-    // console.log('vm.bonusCup1 is ', vm.bonusCup1);
-    // console.log('vm.bonusCup2 is ', vm.bonusCup2);
-    // if (vm.bonusCup2 === undefined) {
-    //   vm.msg = 'Cup ' + cup.substring(1) + ' has been selected. Select another cup or click cup ' + cup.substring(1) + ' again to de-select it.';
-    // }
-  };
-
-  vm.redoBonus = function() {
-    $('#bonus-modal').modal('close');
-  };
-
-  vm.confirmBonus = function() {
-    for (var i=0; i<vm.bonusCupArray.length; i++) {
-      vm.showCups[vm.bonusCupArray[i]] = false;
-    };
-
-    if (vm.activeTeam === 1) {
-      vm.t1cupsAvail -= vm.bonusCupArray.length;
-    } else {
-      vm.t2cupsAvail -= vm.bonusCupArray.length;
-    };
-
-    if (modifier !== 'same' && modifier !== 'double') {
-      vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
-    };
-    vm.bonusCupArray = [];
-    vm.bonusActive = false;
-    modifier = null;
-    vm.msg = null;
-  }
-
   vm.splash = function(result, player, cup) {
     if (result === 'spill') {
       vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
@@ -191,6 +133,13 @@ function ScoreController () {
       modifier = 'double';
     } else {
       modifier = null;
+    };
+
+    if (result === 'bounce') {
+      if (vm.turnShots === 0) {
+        vm.msg = "A successful bounce! An extra cup will be removed at the end of the turn.";
+        bounceMod = true;
+      }
     };
 
     if (vm.activeTeam === 1) {
@@ -221,7 +170,7 @@ function ScoreController () {
     if (vm.turnShots === 0) {
       vm.turnShots++;
       vm.activeCup = cup;
-      vm.activeShooter = 'vm.t' + team + 'p' + otherP;
+      vm.activeShooter = 'vm.t' + vm.activeTeam + 'p' + otherP;
     } else {
       if (modifier === 'double') {
         vm.turnShots = 0;
@@ -234,8 +183,8 @@ function ScoreController () {
       } else if (modifier === 'same') {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
-        vm.showCups[vm.activeCup] = false;
         vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
         vm.bonusActive = true;
         vm.activeShooter = null;
         vm.bonusToPull = 2;
@@ -244,8 +193,8 @@ function ScoreController () {
         vm.turnShots = 0;
         vm.activeCup = null;
         vm.showCups[cup] = false;
-        vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
         vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+        vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
         vm.activeShooter = null;
       }
     };
@@ -255,6 +204,64 @@ function ScoreController () {
     vm.shotResult = null;
     vm.shotMaker = null;
   };
+
+  vm.bonusCup = function(cup) {
+    if (vm.bonusCups[cup] !== true) {
+      vm.bonusCups[cup] = true;
+      vm.bonusCupArray.push(cup);
+    } else {
+      var cupIndex = vm.bonusCupArray.indexOf(cup);
+      vm.bonusCupArray.splice(cupIndex, 1);
+      vm.bonusCups[cup] = false;
+    };
+
+    console.log('vm.bonusCupCount is ', vm.bonusCupArray.length);
+    console.log(vm.bonusCupArray);
+
+    if (vm.bonusCupArray.length === vm.bonusToPull) {
+      vm.bonusMsg = '';
+      for (var i=0; i<vm.bonusCupArray.length; i++){
+        if (i < vm.bonusCupArray.length-1) {
+          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + ' and ';
+        } else {
+          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + '?';
+        };
+      };
+      $('#bonus-modal').modal('open');
+    };
+
+    if (vm.bonusCupArray.length > vm.bonusToPull) {
+      vm.msg = "You've selected too many cups; you can only pull " + vm.bonusToPull + " cups. Please de-select cups."
+    } else {
+      vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn."
+    }
+  };
+
+  vm.redoBonus = function() {
+    $('#bonus-modal').modal('close');
+  };
+
+  vm.confirmBonus = function() {
+    for (var i=0; i<vm.bonusCupArray.length; i++) {
+      vm.showCups[vm.bonusCupArray[i]] = false;
+    };
+
+    if (vm.activeTeam === 1) {
+      vm.t1cupsAvail -= vm.bonusCupArray.length;
+    } else {
+      vm.t2cupsAvail -= vm.bonusCupArray.length;
+    };
+
+    if (modifier !== 'same' && modifier !== 'double') {
+      vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
+    };
+    vm.bonusCupArray = [];
+    vm.bonusActive = false;
+    modifier = null;
+    vm.msg = null;
+    bounceMod = null;
+    vm.activeCup = null;
+  }
 
   vm.showCups = {
     'l1': true,
