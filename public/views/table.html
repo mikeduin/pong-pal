@@ -10,6 +10,18 @@
   </div>
 </div>
 
+<div id="bonus-modal" class="modal">
+  <div class="modal-content">
+    <h4>{{vm.bonusMsg}}</h4>
+    <div class="row">
+      <div class="col s12 center-align">
+        <button class="btn modal-close waves-effect" ng-click="vm.confirmBonus()">CONFIRM</button>
+        <button class="btn modal-close waves-effect" ng-click="vm.redoBonus()">CHANGE CUPS</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="splash-modal" class="modal">
   <div class="modal-content">
     <!-- <div ng-show="!vm.bonusPull"> -->

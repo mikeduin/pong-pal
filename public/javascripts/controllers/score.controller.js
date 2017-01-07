@@ -119,6 +119,24 @@ function ScoreController () {
     console.log('vm.bonusCupCount is ', vm.bonusCupArray.length);
     console.log(vm.bonusCupArray);
 
+    if (vm.bonusCupArray.length === vm.bonusToPull) {
+      vm.bonusMsg = 'Pull cups ';
+      for (var i=0; i<vm.bonusCupArray.length; i++){
+        if (i < vm.bonusCupArray.length-1) {
+          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + ' and ';
+        } else {
+          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + '?';
+        };
+      };
+      $('#bonus-modal').modal('open');
+    };
+
+    if (vm.bonusCupArray.length > vm.bonusToPull) {
+      vm.msg = "You've selected too many cups; you can only pull " + vm.bonusToPull + " cups. Please de-select cups."
+    } else {
+      vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn."
+    }
+
     // vm.bonusCup1 === undefined ? vm.bonusCup1 = cup : vm.bonusCup2 = cup;
     // console.log('vm.bonusCup1 is ', vm.bonusCup1);
     // console.log('vm.bonusCup2 is ', vm.bonusCup2);
@@ -126,6 +144,22 @@ function ScoreController () {
     //   vm.msg = 'Cup ' + cup.substring(1) + ' has been selected. Select another cup or click cup ' + cup.substring(1) + ' again to de-select it.';
     // }
   };
+
+  vm.redoBonus = function() {
+    $('#bonus-modal').modal('close');
+  };
+
+  vm.confirmBonus = function() {
+    for (var i=0; i<vm.bonusCupArray.length; i++) {
+      vm.showCups[vm.bonusCupArray[i]] = false;
+    };
+    if (vm.activeTeam === 1) {
+      vm.t1cupsAvail -= vm.bonusCupArray.length;
+    } else {
+      vm.t2cupsAvail -= vm.bonusCupArray.length;
+    };
+    vm.bonusCupArray = [];
+  }
 
   vm.splash = function(team, result, player, cup) {
     if (result === 'spill') {
@@ -194,6 +228,7 @@ function ScoreController () {
         vm.activeCup = null;
         vm.bonusPull = true;
         vm.activeShooter = null;
+        vm.bonusToPull = 2;
         vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
       } else {
         vm.turnShots = 0;
