@@ -37,6 +37,7 @@ function ScoreController () {
   var doubleOpp = false;
   var modifier = null;
   var bounceMod = null;
+  var bounceDbl = false;
 
   vm.miss = function (player) {
     var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
@@ -144,7 +145,11 @@ function ScoreController () {
     };
 
     if (result === 'bounce') {
-      bounceMod = true;
+      if (bounceMod === true) {
+        bounceDbl = true;
+      } else {
+        bounceMod = true;
+      };
       if (vm.turnShots === 0) {
         vm.msg = "A successful bounce! An extra cup will be removed at the end of the turn.";
       };
@@ -180,7 +185,27 @@ function ScoreController () {
       vm.activeCup = cup;
       vm.activeShooter = 'vm.t' + vm.activeTeam + 'p' + otherP;
     } else {
-      if (modifier === 'double' && bounceMod) {
+      if (modifier === 'double' && bounceDbl) {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.showCups[vm.activeCup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 2 : vm.t2cupsAvail -= 2;
+        vm.bonusActive = true;
+        vm.activeShooter = null;
+        vm.bonusToPull = 2;
+        vm.msg = "Two bounces into two different cups! Select the extra two cups that will be pulled from the table as a result of the bounces. Team " + vm.activeTeam + " will then get balls back.";
+      } else if (modifier === 'same' && bounceDbl) {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.showCups[vm.activeCup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+        vm.bonusActive = true;
+        vm.activeShooter = null;
+        vm.bonusToPull = 4;
+        vm.msg = "TWO BOUNCES INTO THE SAME CUP! The holy grail of team shooting. Select the extra FOUR cups that will be pulled from the table as a result of the bounces. Team " + vm.activeTeam + " will then get balls back.";
+      } else if (modifier === 'double' && bounceMod) {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
         vm.showCups[vm.activeCup] = false;
@@ -189,7 +214,16 @@ function ScoreController () {
         vm.bonusActive = true;
         vm.activeShooter = null;
         vm.bonusToPull = 1;
-        vm.msg = "A bounce shot AND double cups! Please select the extra cup that will be pulled from the table as a result of the bounce. Team " + vm.activeTeam + " will then get balls back.";
+        vm.msg = "A bounce shot AND double cups! Select the extra cup that will be pulled from the table as a result of the bounce. Team " + vm.activeTeam + " will then get balls back.";
+      } else if (modifier === 'same' && bounceMod) {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+        vm.bonusActive = true;
+        vm.activeShooter = null;
+        vm.bonusToPull = 3;
+        vm.msg = "A bounce shot AND same cups! Select the extra THREE cups that will be pulled from the table as a result. Team " + vm.activeTeam + " will then get balls back.";
       } else if (modifier === 'double') {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
@@ -206,7 +240,7 @@ function ScoreController () {
         vm.bonusActive = true;
         vm.activeShooter = null;
         vm.bonusToPull = 2;
-        vm.msg = "A successful same-cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
+        vm.msg = "A successful same-cup shot! Select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
       } else if (bounceMod) {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
@@ -215,7 +249,7 @@ function ScoreController () {
         vm.bonusActive = true;
         vm.activeShooter = null;
         vm.bonusToPull = 1;
-        vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce."
+        vm.msg = "Select the extra cup the opposing team pulled as a result of the bounce."
       } else {
         vm.turnShots = 0;
         vm.activeCup = null;
@@ -259,9 +293,7 @@ function ScoreController () {
 
     if (vm.bonusCupArray.length > vm.bonusToPull) {
       vm.msg = "You've selected too many cups; you can only pull " + vm.bonusToPull + " cups. Please de-select cups."
-    } else {
-      vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn."
-    }
+    };
   };
 
   vm.redoBonus = function() {
