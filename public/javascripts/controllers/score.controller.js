@@ -144,10 +144,10 @@ function ScoreController () {
     };
 
     if (result === 'bounce') {
+      bounceMod = true;
       if (vm.turnShots === 0) {
         vm.msg = "A successful bounce! An extra cup will be removed at the end of the turn.";
-        bounceMod = true;
-      }
+      };
     };
 
     if (vm.activeTeam === 1) {
@@ -197,6 +197,14 @@ function ScoreController () {
         vm.activeShooter = null;
         vm.bonusToPull = 2;
         vm.msg = "A successful same-cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
+      } else if (bounceMod) {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+        vm.bonusActive = true;
+        vm.bonusToPull = 1;
+        vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce."
       } else {
         vm.turnShots = 0;
         vm.activeCup = null;
