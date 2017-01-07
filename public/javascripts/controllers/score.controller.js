@@ -180,7 +180,17 @@ function ScoreController () {
       vm.activeCup = cup;
       vm.activeShooter = 'vm.t' + vm.activeTeam + 'p' + otherP;
     } else {
-      if (modifier === 'double') {
+      if (modifier === 'double' && bounceMod) {
+        vm.turnShots = 0;
+        vm.showCups[cup] = false;
+        vm.showCups[vm.activeCup] = false;
+        vm.activeCup = null;
+        vm.activeTeam === 1 ? vm.t1cupsAvail -= 2 : vm.t2cupsAvail -= 2;
+        vm.bonusActive = true;
+        vm.activeShooter = null;
+        vm.bonusToPull = 1;
+        vm.msg = "A bounce shot AND double cups! Please select the extra cup that will be pulled from the table as a result of the bounce. Team " + vm.activeTeam + " will then get balls back.";
+      } else if (modifier === 'double') {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
         vm.showCups[vm.activeCup] = false;
@@ -203,6 +213,7 @@ function ScoreController () {
         vm.activeCup = null;
         vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
         vm.bonusActive = true;
+        vm.activeShooter = null;
         vm.bonusToPull = 1;
         vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce."
       } else {
