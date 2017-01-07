@@ -174,10 +174,10 @@ a {
   color: #B11C19;
 }
 
-.cup:hover {
-  background-color: black;
+.cup-bonus {
+  border: solid 3px #2F5032;
+  background-color: #68A870;
   color: white;
-  cursor: pointer;
 }
 
 .cup-left-back {

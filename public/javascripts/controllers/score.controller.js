@@ -33,29 +33,8 @@ function ScoreController () {
   vm.t1p2shots = [];
   vm.t2p1shots = [];
   vm.t2p2shots = [];
+  vm.bonusCupArray = [];
   var doubleOpp = false;
-  vm.showCups = {
-    'l1': true,
-    'l2': true,
-    'l3': true,
-    'l4': true,
-    'l5': true,
-    'l6': true,
-    'l7': true,
-    'l8': true,
-    'l9': true,
-    'l10': true,
-    'r1': true,
-    'r2': true,
-    'r3': true,
-    'r4': true,
-    'r5': true,
-    'r6': true,
-    'r7': true,
-    'r8': true,
-    'r9': true,
-    'r10': true,
-  };
 
   vm.miss = function (team, player) {
     var pArray = eval('vm.t' + team + 'p' + player + 'shots');
@@ -127,11 +106,25 @@ function ScoreController () {
     $('#splash-modal').modal('close');
   };
 
-  vm.bonusCup = function(team, cup) {
-    vm.bonusCup1 === null ? vm.bonusCup1 = cup : vm.bonusCup2 = cup;
-    if (vm.bonusCup2 === null) {
-      vm.msg === 'Cup ' + cup.substring(1) + ' has been selected. Select another cup or click cup ' + cup.substring(1) + ' again to de-select it.';
-    }
+  vm.bonusCup = function(cup) {
+    if (vm.bonusCups[cup] !== true) {
+      vm.bonusCups[cup] = true;
+      vm.bonusCupArray.push(cup);
+    } else {
+      var cupIndex = vm.bonusCupArray.indexOf(cup);
+      vm.bonusCupArray.splice(cupIndex, 1);
+      vm.bonusCups[cup] = false;
+    };
+
+    console.log('vm.bonusCupCount is ', vm.bonusCupArray.length);
+    console.log(vm.bonusCupArray);
+
+    // vm.bonusCup1 === undefined ? vm.bonusCup1 = cup : vm.bonusCup2 = cup;
+    // console.log('vm.bonusCup1 is ', vm.bonusCup1);
+    // console.log('vm.bonusCup2 is ', vm.bonusCup2);
+    // if (vm.bonusCup2 === undefined) {
+    //   vm.msg = 'Cup ' + cup.substring(1) + ' has been selected. Select another cup or click cup ' + cup.substring(1) + ' again to de-select it.';
+    // }
   };
 
   vm.splash = function(team, result, player, cup) {
@@ -178,10 +171,14 @@ function ScoreController () {
     });
 
     console.log('pArray is ', pArray);
+    var otherP;
+
+    player === 1 ? otherP = 2 : otherP = 1;
 
     if (vm.turnShots === 0) {
       vm.turnShots++;
       vm.activeCup = cup;
+      vm.activeShooter = 'vm.t' + team + 'p' + otherP;
     } else {
       if (modifier === 'double') {
         vm.turnShots = 0;
@@ -189,12 +186,14 @@ function ScoreController () {
         vm.showCups[vm.activeCup] = false;
         vm.activeCup = null;
         vm.activeTeam === 1 ? vm.t1cupsAvail -= 2 : vm.t2cupsAvail -= 2;
+        vm.activeShooter = null;
       } else if (modifier === 'same') {
         vm.turnShots = 0;
         vm.showCups[cup] = false;
         vm.showCups[vm.activeCup] = false;
         vm.activeCup = null;
         vm.bonusPull = true;
+        vm.activeShooter = null;
         vm.msg = "A successful same cup shot! Please select the extra cups that the opposing team has pulled from the table before beginning your next turn.";
       } else {
         vm.turnShots = 0;
@@ -202,6 +201,7 @@ function ScoreController () {
         vm.showCups[cup] = false;
         vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
         vm.activeTeam === 1 ? vm.t1cupsAvail -= 1 : vm.t2cupsAvail -= 1;
+        vm.activeShooter = null;
       }
     };
 
@@ -209,6 +209,52 @@ function ScoreController () {
 
     vm.shotResult = null;
     vm.shotMaker = null;
-  }
+  };
+
+  vm.showCups = {
+    'l1': true,
+    'l2': true,
+    'l3': true,
+    'l4': true,
+    'l5': true,
+    'l6': true,
+    'l7': true,
+    'l8': true,
+    'l9': true,
+    'l10': true,
+    'r1': true,
+    'r2': true,
+    'r3': true,
+    'r4': true,
+    'r5': true,
+    'r6': true,
+    'r7': true,
+    'r8': true,
+    'r9': true,
+    'r10': true
+  };
+
+  vm.bonusCups = {
+    'l1': false,
+    'l2': false,
+    'l3': false,
+    'l4': false,
+    'l5': false,
+    'l6': false,
+    'l7': false,
+    'l8': false,
+    'l9': false,
+    'l10': false,
+    'r1': false,
+    'r2': false,
+    'r3': false,
+    'r4': false,
+    'r5': false,
+    'r6': false,
+    'r7': false,
+    'r8': false,
+    'r9': false,
+    'r10': false
+  };
 
 }

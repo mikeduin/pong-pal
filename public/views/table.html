@@ -35,20 +35,6 @@
       <div class="row center-align subm-row">
         <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
       </div>
-    <!-- </div> -->
-    <!-- <div ng-show="vm.bonusPull">
-      <div class="row splash-header center-align">
-        <span class="col s10">
-          Remove cup {{vm.splashedCup}}?
-        </span>
-        <span class="col s2 right-align">
-          <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
-        </span>
-      </div>
-      <div class="row center-align subm-row">
-        <button class="btn waves-effect btn-submit" ng-click="vm.bonusCup(vm.activeTeam, vm.splashedCup)">SUBMIT</button>
-      </div>
-    </div> -->
   </div>
 </div>
 
@@ -90,40 +76,40 @@
       <div class="col s6" id="table-left">
         <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTeam === 1}">
           <div class="col">
-            <div class="cup cup-left-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l7') : vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'hidden': vm.showCups['l7'] === false}">
+            <div class="cup cup-left-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l7') : vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'cup-bonus': vm.bonusCups['l7'], 'hidden': vm.showCups['l7'] === false}">
               7
             </div>
-            <div class="cup cup-left-back" ng-click="vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'hidden': vm.showCups['l8'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l8') : vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'cup-bonus': vm.bonusCups['l8'], 'hidden': vm.showCups['l8'] === false}">
               8
             </div>
-            <div class="cup cup-left-back" ng-click="vm.splashModal('l9')" ng-class="{'cup-active': vm.activeCup === 'l9', 'hidden': vm.showCups['l9'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l9') : vm.splashModal('l9')" ng-class="{'cup-active': vm.activeCup === 'l9', 'cup-bonus': vm.bonusCups['l9'], 'hidden': vm.showCups['l9'] === false}">
               9
             </div>
-            <div class="cup cup-left-back" ng-click="vm.splashModal('l10')" ng-class="{'cup-active': vm.activeCup === 'l10', 'hidden': vm.showCups['l10'] === false}">
+            <div class="cup cup-left-back" ng-click="vm.bonusPull ? vm.bonusCup('l10') : vm.splashModal('l10')" ng-class="{'cup-active': vm.activeCup === 'l10', 'cup-bonus': vm.bonusCups['l10'], 'hidden': vm.showCups['l10'] === false}">
               10
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-back-top" ng-click="vm.splashModal('l4')" ng-class="{'cup-active': vm.activeCup === 'l4', 'hidden': vm.showCups['l4'] === false}">
+            <div class="cup cup-left-mid-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l4') : vm.splashModal('l4')" ng-class="{'cup-active': vm.activeCup === 'l4', 'cup-bonus': vm.bonusCups['l4'], 'hidden': vm.showCups['l4'] === false}">
               4
             </div>
-            <div class="cup cup-left-mid-back" ng-click="vm.splashModal('l5')" ng-class="{'cup-active': vm.activeCup === 'l5', 'hidden': vm.showCups['l5'] === false}">
+            <div class="cup cup-left-mid-back" ng-click="vm.bonusPull ? vm.bonusCup('l5') : vm.splashModal('l5')" ng-class="{'cup-active': vm.activeCup === 'l5', 'cup-bonus': vm.bonusCups['l5'], 'hidden': vm.showCups['l5'] === false}">
               5
             </div>
-            <div class="cup cup-left-mid-back" ng-click="vm.splashModal('l6')" ng-class="{'cup-active': vm.activeCup === 'l6', 'hidden': vm.showCups['l6'] === false}">
+            <div class="cup cup-left-mid-back" ng-click="vm.bonusPull ? vm.bonusCup('l6') : vm.splashModal('l6')" ng-class="{'cup-active': vm.activeCup === 'l6', 'cup-bonus': vm.bonusCups['l6'], 'hidden': vm.showCups['l6'] === false}">
               6
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-mid-front-top" ng-click="vm.splashModal('l2')" ng-class="{'cup-active': vm.activeCup === 'l2', 'hidden': vm.showCups['l2'] === false}">
+            <div class="cup cup-left-mid-front-top" ng-click="vm.bonusPull ? vm.bonusCup('l2') : vm.splashModal('l2')" ng-class="{'cup-active': vm.activeCup === 'l2', 'cup-bonus': vm.bonusCups['l2'], 'hidden': vm.showCups['l2'] === false}">
               2
             </div>
-            <div class="cup cup-left-mid-front" ng-click="vm.splashModal('l3')" ng-class="{'cup-active': vm.activeCup === 'l3', 'hidden': vm.showCups['l3'] === false}">
+            <div class="cup cup-left-mid-front" ng-click="vm.bonusPull ? vm.bonusCup('l3') : vm.splashModal('l3')" ng-class="{'cup-active': vm.activeCup === 'l3', 'cup-bonus': vm.bonusCups['l3'], 'hidden': vm.showCups['l3'] === false}">
               3
             </div>
           </div>
           <div class="col">
-            <div class="cup cup-left-front" ng-click="vm.splashModal('l1')" ng-class="{'cup-active': vm.activeCup === 'l1', 'hidden': vm.showCups['l1'] === false}">
+            <div class="cup cup-left-front" ng-click="vm.bonusPull ? vm.bonusCup('l1') : vm.splashModal('l1')" ng-class="{'cup-active': vm.activeCup === 'l1', 'cup-bonus': vm.bonusCups['l1'], 'hidden': vm.showCups['l1'] === false}">
               1
             </div>
           </div>
