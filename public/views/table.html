@@ -12,28 +12,43 @@
 
 <div id="splash-modal" class="modal">
   <div class="modal-content">
-    <div class="row splash-header center-align">
-      <span class="col s10">
-        Team x's Cup {{vm.activeCup}} has been hit!
-      </span>
-      <span class="col s2 right-align">
-        <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
-      </span>
-    </div>
-    <div class="row vert-ctr">
-      <span class="modal-span">SPLASH METHOD</span>
-      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'shot'" ng-class="{'btn-selected': vm.shotResult === 'shot'}">Shot</button>
-      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'bounce'" ng-class="{'btn-selected': vm.shotResult === 'bounce'}">Bounce</button>
-      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'spill'" ng-class="{'btn-selected': vm.shotResult === 'spill'}">Spill</button>
-    </div>
-    <div class="row vert-ctr">
-      <span class="modal-span">WHO MADE THIS SHOT?</span>
-      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 1" ng-class="{'btn-selected': vm.shotMaker === 1, 'disabled': vm.shotResult === 'spill'}">Player 1</button>
-      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill'}">Player 2</button>
-    </div>
-    <div class="row center-align subm-row">
-      <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
-    </div>
+    <!-- <div ng-show="!vm.bonusPull"> -->
+      <div class="row splash-header center-align">
+        <span class="col s10">
+          Team x's Cup {{vm.splashedCup}} has been hit!
+        </span>
+        <span class="col s2 right-align">
+          <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
+        </span>
+      </div>
+      <div class="row vert-ctr">
+        <span class="modal-span">SPLASH METHOD</span>
+        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'shot'" ng-class="{'btn-selected': vm.shotResult === 'shot'}">Shot</button>
+        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'bounce'" ng-class="{'btn-selected': vm.shotResult === 'bounce'}">Bounce</button>
+        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'spill'" ng-class="{'btn-selected': vm.shotResult === 'spill'}">Spill</button>
+      </div>
+      <div class="row vert-ctr">
+        <span class="modal-span">WHO MADE THIS SHOT?</span>
+        <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 1" ng-class="{'btn-selected': vm.shotMaker === 1, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t2p2'}">Player 1</button>
+        <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1'}">Player 2</button>
+      </div>
+      <div class="row center-align subm-row">
+        <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.activeTeam, vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
+      </div>
+    <!-- </div> -->
+    <!-- <div ng-show="vm.bonusPull">
+      <div class="row splash-header center-align">
+        <span class="col s10">
+          Remove cup {{vm.splashedCup}}?
+        </span>
+        <span class="col s2 right-align">
+          <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
+        </span>
+      </div>
+      <div class="row center-align subm-row">
+        <button class="btn waves-effect btn-submit" ng-click="vm.bonusCup(vm.activeTeam, vm.splashedCup)">SUBMIT</button>
+      </div>
+    </div> -->
   </div>
 </div>
 
@@ -44,7 +59,7 @@
     </div>
   </div>
   <div class="col s8 msg-display">
-    messages go here
+    {{vm.msg}}
   </div>
   <div class="col s2 center-align">
     <div ng-show="vm.activeTeam === 2">
@@ -75,7 +90,7 @@
       <div class="col s6" id="table-left">
         <div class="rack-left-default" ng-class="{'cup-disabled': vm.activeTeam === 1}">
           <div class="col">
-            <div class="cup cup-left-back-top" ng-click="vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'hidden': vm.showCups['l7'] === false}">
+            <div class="cup cup-left-back-top" ng-click="vm.bonusPull ? vm.bonusCup('l7') : vm.splashModal('l7')" ng-class="{'cup-active': vm.activeCup === 'l7', 'hidden': vm.showCups['l7'] === false}">
               7
             </div>
             <div class="cup cup-left-back" ng-click="vm.splashModal('l8')" ng-class="{'cup-active': vm.activeCup === 'l8', 'hidden': vm.showCups['l8'] === false}">
