@@ -94,6 +94,14 @@ function ScoreController () {
     console.log('vm.activeShooter is ', vm.activeShooter);
   };
 
+  vm.cupClick = function(cup) {
+    if (vm.bonusActive) {
+      vm.bonusCup(cup);
+    } else {
+      vm.splashModal(cup);
+    };
+  };
+
   vm.splashModal = function(cup) {
     vm.splashedCup = cup;
     if (vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1') {
