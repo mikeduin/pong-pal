@@ -27,7 +27,7 @@
     <!-- <div ng-show="!vm.bonusActive"> -->
       <div class="row splash-header center-align">
         <span class="col s10">
-          Team x's Cup {{vm.splashedCup}} has been hit!
+          Team x's Cup {{vm.cupNumb}} has been hit!
         </span>
         <span class="col s2 right-align">
           <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
@@ -194,5 +194,8 @@
 <div class="row">
   <div class="col s12 center-align">
     Frame: {{vm.activeFrame}} ... Team: {{vm.activeTeam}} ... Turn Shots: {{vm.turnShots}} ... Frame Shots: {{vm.frameShots}}
+  </div>
+  <div class="col s12 center-align">
+    Active Cup: {{vm.activeCup}} ... Double Opp: {{vm.doubleOpp}}
   </div>
 </div>

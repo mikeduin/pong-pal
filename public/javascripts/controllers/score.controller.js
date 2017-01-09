@@ -34,16 +34,19 @@ function ScoreController () {
   vm.t2p1shots = [];
   vm.t2p2shots = [];
   vm.bonusCupArray = [];
-  var doubleOpp = false;
+  // CHANGE ALL VM.DOUBLEOPPS TO DOUBLEOPPS - DON'T NEED VM, WAS JUST INSTALLED TO TEST
+  vm.doubleOpp = false;
   var modifier = null;
   var bounceMod = null;
   var bounceDbl = false;
+  vm.msgStack = [];
+  vm.msg = vm.msgStack[vm.msgStack.length-1];
 
   vm.miss = function (player) {
     var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
     console.log('pArray is ', pArray);
     if (vm.activeCup !== null) {
-      doubleOpp = true;
+      vm.doubleOpp = true;
     };
 
     if (vm.activeTeam === 1) {
@@ -59,7 +62,7 @@ function ScoreController () {
     pArray.push({
       frame: frame,
       cups: cupsAvail,
-      doubleOpp: doubleOpp,
+      doubleOpp: vm.doubleOpp,
       rack: rack,
       splash: false,
       cup: null,
@@ -86,9 +89,11 @@ function ScoreController () {
       if (bounceMod) {
         vm.bonusActive = true;
         vm.bonusToPull = 1;
-        vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce."
+        vm.msg = "Please select the extra cup the opposing team pulled as a result of the bounce.";
       } else {
         vm.activeTeam === 1 ? vm.activeTeam = 2 : vm.activeTeam = 1;
+        vm.activeCup = null;
+        vm.doubleOpp = false;
       }
     };
 
@@ -105,6 +110,7 @@ function ScoreController () {
 
   vm.splashModal = function(cup) {
     vm.splashedCup = cup;
+    vm.cupNumb = cup.substring(1);
     if (vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1') {
       vm.shotMaker = 1;
     };
@@ -118,6 +124,7 @@ function ScoreController () {
     vm.shotResult = null;
     vm.shotMaker = null;
     vm.splashedCup = null;
+    vm.cupNumb = null;
     $('#splash-modal').modal('close');
   };
 
@@ -133,7 +140,7 @@ function ScoreController () {
     var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');
     console.log('pArray is ', pArray);
     if (vm.activeCup !== null) {
-      doubleOpp = true;
+      vm.doubleOpp = true;
     };
 
     if (cup === vm.activeCup) {
@@ -168,7 +175,7 @@ function ScoreController () {
     pArray.push({
       frame: frame,
       cups: cupsAvail,
-      doubleOpp: doubleOpp,
+      doubleOpp: vm.doubleOpp,
       rack: rack,
       splash: true,
       cup: cup,
@@ -183,6 +190,7 @@ function ScoreController () {
     if (vm.turnShots === 0) {
       vm.turnShots++;
       vm.activeCup = cup;
+      vm.doubleOpp = true;
       vm.activeShooter = 'vm.t' + vm.activeTeam + 'p' + otherP;
     } else {
       if (modifier === 'double' && bounceDbl) {
@@ -282,7 +290,9 @@ function ScoreController () {
     if (vm.bonusCupArray.length === vm.bonusToPull) {
       vm.bonusMsg = '';
       for (var i=0; i<vm.bonusCupArray.length; i++){
-        if (i < vm.bonusCupArray.length-1) {
+        if (i < vm.bonusCupArray.length-2) {
+          vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + ', ';
+        } else if (i < vm.bonusCupArray.length-1) {
           vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + ' and ';
         } else {
           vm.bonusMsg = vm.bonusMsg + vm.bonusCupArray[i].substring(1) + '?';
@@ -320,6 +330,7 @@ function ScoreController () {
     vm.msg = null;
     bounceMod = null;
     vm.activeCup = null;
+    vm.doubleOpp = false;
   }
 
   vm.showCups = {
