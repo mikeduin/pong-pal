@@ -178,7 +178,7 @@ a {
 
 #table-left {
   margin-left: -12px;
-  height: 275px;
+  height: 280px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -200,34 +200,28 @@ a {
   margin-left: -32px;
 }
 
-.cup-right-back {
-  margin-left: -32px;
+#table-right {
+  margin-right: 12px;
+  padding-right: 0px;
+  height: 280px;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.cup-right-back-top {
-  margin-top: 20px;
-  margin-left: -32px;
+.right-back {
+  margin-right: -22px;
 }
 
-.cup-right-mid-back-top {
-  margin-top: 50px;
-  margin-left: -60px
+.right-mid-back {
+  margin-right: -32px;
 }
 
-.cup-right-mid-back {
-  margin-left: -60px
+.right-mid-front {
+  margin-right: -32px;
 }
 
-.cup-right-mid-front-top {
-  margin-top: 80px;
-  margin-left: -90px;
-}
-
-.cup-right-mid-front {
-  margin-left: -90px;
-}
-
-.cup-right-front {
-  margin-top: 110px;
-  margin-left: -117px;
+.right-front {
+  margin-right: -32px;
 }
