@@ -22,6 +22,10 @@ function ScoreController () {
   vm.activeTeam;
   vm.activeShooter;
   vm.activeCup = null;
+  vm.bonusCupArray = [];
+  vm.msgStack = [];
+  vm.msg = vm.msgStack[vm.msgStack.length-1];
+  vm.rackSelect = null;
   vm.turnShots = 0;
   vm.t1frame = 1;
   vm.t2frame = 1;
@@ -33,14 +37,37 @@ function ScoreController () {
   vm.t1p2shots = [];
   vm.t2p1shots = [];
   vm.t2p2shots = [];
-  vm.bonusCupArray = [];
   // CHANGE ALL VM.DOUBLEOPPS TO DOUBLEOPPS - DON'T NEED VM, WAS JUST INSTALLED TO TEST
   vm.doubleOpp = false;
   var modifier = null;
   var bounceMod = null;
   var bounceDbl = false;
-  vm.msgStack = [];
-  vm.msg = vm.msgStack[vm.msgStack.length-1];
+
+  vm.rerack = function() {
+    var side;
+    vm.activeTeam === 1 ? side = 'r' : side = 'l';
+    if (vm.rackSelect === 'nine-cup') {
+      for (var i=0; i<11; i++) {
+        var cup = '' + side + i;
+        vm.showCups[cup] = true;
+      }
+      vm.showCups[side+'1'] = false;
+    }
+
+
+
+    //last
+    $('#rerack-modal').modal('close');
+    vm.rackSelect = null;
+  }
+
+  vm.openRack = function(){
+    $('#rerack-modal').modal('open');
+  };
+
+  vm.closeRack = function(){
+    $('#rerack-modal').modal('close');
+  };
 
   vm.miss = function (player) {
     var pArray = eval('vm.t' + vm.activeTeam + 'p' + player + 'shots');

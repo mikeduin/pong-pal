@@ -137,14 +137,7 @@ function selectionSort(arr) {
 
 
 function insertionSort(arr) {
-  for (var i=0; i<arr.length; i++) {
-    var currentItem = arr[i];
-    for (var j=1; j<arr.length; j++) {
-      var currentItem = arr[j];
-      if (currentItem < currSortItem) {
-        swap (arr, i, j);
-      };
-      currSortItem = arr[j-1];
-    }
+  for (var i=1; i<arr.length; i++) {
+    
   }
 }

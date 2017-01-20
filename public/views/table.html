@@ -24,29 +24,56 @@
 
 <div id="splash-modal" class="modal">
   <div class="modal-content">
-    <!-- <div ng-show="!vm.bonusActive"> -->
-      <div class="row splash-header center-align">
-        <span class="col s10">
-          Team x's Cup {{vm.cupNumb}} has been hit!
-        </span>
-        <span class="col s2 right-align">
-          <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
-        </span>
+    <div class="row splash-header center-align">
+      <span class="col s10">
+        Team x's Cup {{vm.cupNumb}} has been hit!
+      </span>
+      <span class="col s2 right-align">
+        <button class="btn splash-x" ng-click="vm.closeModal()">CANCEL</button>
+      </span>
+    </div>
+    <div class="row vert-ctr">
+      <span class="modal-span">SPLASH METHOD</span>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'shot'" ng-class="{'btn-selected': vm.shotResult === 'shot'}">Shot</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'bounce'" ng-class="{'btn-selected': vm.shotResult === 'bounce'}">Bounce</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'spill'" ng-class="{'btn-selected': vm.shotResult === 'spill'}">Spill</button>
+    </div>
+    <div class="row vert-ctr">
+      <span class="modal-span">WHO MADE THIS SHOT?</span>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 1" ng-class="{'btn-selected': vm.shotMaker === 1, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t2p2'}">Player 1</button>
+      <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1'}">Player 2</button>
+    </div>
+    <div class="row center-align subm-row">
+      <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
+    </div>
+  </div>
+</div>
+
+<div id="rerack-modal" class="modal">
+  <div class="modal-content">
+    <div class="row splash-header center-align">
+      <span class="col s10">
+        Select the rerack formation for Team 1
+      </span>
+      <span class="col s2 right-align">
+        <button class="btn splash-x" ng-click="vm.closeRack()">CANCEL</button>
+      </span>
+    </div>
+    <div class="row center-align">
+      Team {{vm.activeTeam}} has
+      <span ng-if='vm.activeTeam === 1'>{{vm.t1cupsAvail}}</span>
+      <span ng-if='vm.activeTeam === 2'>{{vm.t2cupsAvail}}</span>
+      cups left to hit. Your rerack options are:
+    </div>
+    <div class="row">
+      <div class="col s2 offset-s2">
+        NINE CUP
+        <button class="btn btn-splash" ng-click="vm.rackSelect = 'nine-cup'" ng-class="{'btn-selected': vm.rackSelect === 'nine-cup', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='nine-cup'}">NINE-CUP</button>
       </div>
-      <div class="row vert-ctr">
-        <span class="modal-span">SPLASH METHOD</span>
-        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'shot'" ng-class="{'btn-selected': vm.shotResult === 'shot'}">Shot</button>
-        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'bounce'" ng-class="{'btn-selected': vm.shotResult === 'bounce'}">Bounce</button>
-        <button class="btn waves-effect btn-splash" ng-click="vm.shotResult = 'spill'" ng-class="{'btn-selected': vm.shotResult === 'spill'}">Spill</button>
-      </div>
-      <div class="row vert-ctr">
-        <span class="modal-span">WHO MADE THIS SHOT?</span>
-        <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 1" ng-class="{'btn-selected': vm.shotMaker === 1, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t2p2'}">Player 1</button>
-        <button class="btn waves-effect btn-splash" ng-click="vm.shotMaker = 2" ng-class="{'btn-selected': vm.shotMaker === 2, 'disabled': vm.shotResult === 'spill' || vm.activeShooter === 'vm.t1p1' || vm.activeShooter === 'vm.t2p1'}">Player 2</button>
-      </div>
-      <div class="row center-align subm-row">
-        <button class="btn waves-effect btn-submit" ng-click="vm.splash(vm.shotResult, vm.shotMaker, vm.splashedCup)">SUBMIT</button>
-      </div>
+    </div>
+    <div class="row center-align subm-row">
+      <button class="btn waves-effect btn-submit" ng-click="vm.rerack()">SUBMIT</button>
+    </div>
   </div>
 </div>
 
@@ -71,7 +98,7 @@
 <div class="row">
   <div class="col s2 left-team">
     TEAM #1
-      <button class="btn waves-effect waves-light btn-rerack" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t1p1' || vm.bonusActive}">RERACK</button>
+      <button class="btn waves-effect waves-light btn-rerack" ng-click="vm.openRack()" ng-class="{'disabled': vm.activeTeam === 2 || vm.activeShooter === 'vm.t1p2' || vm.activeShooter === 'vm.t1p1' || vm.bonusActive}">RERACK</button>
     <div class="player">
       Player 1
       <div>
@@ -129,40 +156,40 @@
       </div>
       <div class="col s6" ng-class="{'cup-disabled': vm.activeTeam === 2}" id="table-right">
         <div class="col right-back">
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r10') : null" ng-class="{'cup-active': vm.activeCup === 'r10', 'cup-bonus': vm.bonusCups['r10'], 'hidden': vm.showCups['r10'] === false}">
             10
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r9') : null" ng-class="{'cup-active': vm.activeCup === 'r9', 'cup-bonus': vm.bonusCups['r9'], 'hidden': vm.showCups['r9'] === false}">
             9
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r8') : null" ng-class="{'cup-active': vm.activeCup === 'r8', 'cup-bonus': vm.bonusCups['r8'], 'hidden': vm.showCups['r8'] === false}">
             8
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r7') : null" ng-class="{'cup-active': vm.activeCup === 'r7', 'cup-bonus': vm.bonusCups['r7'], 'hidden': vm.showCups['r7'] === false}">
             7
           </div>
         </div>
         <div class="col right-mid-back">
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r6') : null" ng-class="{'cup-active': vm.activeCup === 'r6', 'cup-bonus': vm.bonusCups['r6'], 'hidden': vm.showCups['r6'] === false}">
             6
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r5') : null" ng-class="{'cup-active': vm.activeCup === 'r5', 'cup-bonus': vm.bonusCups['r5'], 'hidden': vm.showCups['r5'] === false}">
             5
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r4') : null" ng-class="{'cup-active': vm.activeCup === 'r4', 'cup-bonus': vm.bonusCups['r4'], 'hidden': vm.showCups['r4'] === false}">
             4
           </div>
         </div>
         <div class="col right-mid-front">
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r3') : null" ng-class="{'cup-active': vm.activeCup === 'r3', 'cup-bonus': vm.bonusCups['r3'], 'hidden': vm.showCups['r3'] === false}">
             3
           </div>
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r2') : null" ng-class="{'cup-active': vm.activeCup === 'r2', 'cup-bonus': vm.bonusCups['r2'], 'hidden': vm.showCups['r2'] === false}">
             2
           </div>
         </div>
         <div class="col right-front">
-          <div class="cup">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r1') : null" ng-class="{'cup-active': vm.activeCup === 'r1', 'cup-bonus': vm.bonusCups['r1'], 'hidden': vm.showCups['r1'] === false}">
             1
           </div>
         </div>
