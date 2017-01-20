@@ -1,38 +1,150 @@
-function letterCounter (str) {
-  var obj = {};
-  for (var i=0; i<str.length; i++) {
-    if (/[a-z]/.test(str[i]) !== 1) {
-      if (obj[str[i]] === undefined) {
-        obj[str[i]] = 1
-      } else {
-        obj[str[i]]++
-      };
-    };
-  };
-  return obj;
+var arr = [];
+
+function arrBuilder () {
+  for (var i=0; i<10000001; i++) {
+    arr.push(2)
+  }
 }
 
-
-function ramp (num) {
-  var str = num.toString();
-  var last = 0;
-  for (var i=0; i<str.length; i++) {
-    if (parseInt(str[i]) >= last) {
-      last = parseInt(str[i])
-    } else {
-      return false
-    };
-  };
-  return true;
+function testPerformance (callback, arr) {
+  var t0 = process.hrtime();
+  callback(arr);
+  var t1 = process.hrtime();
+  return t1 - t0;
 }
 
-function palindrome (str) {
-  var str = str.toLowerCase();
-  var fixed = str.replace(/[\W]/g, "");
-  var reversed = fixed.split('').reverse().join('');
-  if (fixed === reversed) {
-    return true
+function square(arr) {
+  return arr.map(function(el){
+    return el * el;
+  })
+}
+
+First step: establish a base case
+Second step: Write recursive component
+
+function factorial (n) {
+  if (n < 0) {
+    return -1
+  } else if (n == 0) {
+    return 1
   } else {
-    return false
+    return (n * factorial(n-1))
   };
+}
+
+function getMaxProfit (arr) {
+  var sorted = arr.sort();
+  var low;
+  var high;
+  if (sorted[0] !== arr[arr.length-1]) {
+    low = sorted[0];
+  } else {
+    low = sorted[1];
+  };
+  if (sorted[sorted.length-1] !== arr[0]) {
+    high = sorted[sorted.length-1];
+  } else {
+    high = sorted[sorted.length-2];
+  }
+  return high-low;
+}
+
+
+----
+
+function swap (arr, ind1, ind2) {
+  var x = arr[ind1];
+  arr[ind1] = arr[ind2];
+  arr[ind2] = x;
+}
+
+
+function bubbleSort(arr) {
+  for (var i=0; i<arr.length; i++) {
+    for (var j=i+1; j<arr.length; j++) {
+      if (arr[i]>arr[j]) {
+        swap (arr, i, j);
+      }
+      console.log(arr);
+    }
+  }
+  return arr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function selectionSort(arr) {
+  for (var i=0; i<arr.length; i++) {
+    var currentMin = arr[i];
+    var minIndex = i;
+    for (var j=i+1; j<arr.length; j++) {
+      if (arr[j] < currentMin) {
+        currentMin = arr[j];
+        minIndex = j;
+      }
+    };
+    swap(arr, i, minIndex);
+  }
+  return arr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function insertionSort(arr) {
+  for (var i=0; i<arr.length; i++) {
+    var currentItem = arr[i];
+    for (var j=1; j<arr.length; j++) {
+      var currentItem = arr[j];
+      if (currentItem < currSortItem) {
+        swap (arr, i, j);
+      };
+      currSortItem = arr[j-1];
+    }
+  }
 }

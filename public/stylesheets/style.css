@@ -139,12 +139,16 @@ a {
   margin-top: 30px;
 }
 
-.rack-left-default {
+/*.rack-left-default {
   margin-left: -12px;
-}
+}*/
 
 .rack-right-default {
   margin-right: -50px;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .cup {
@@ -159,9 +163,7 @@ a {
   font-size: 24px;
 }
 
-.hidden {
-  visibility: hidden;
-}
+
 
 .cup-disabled > div.col > div.cup {
   border: solid 3px #C9C2C2;
