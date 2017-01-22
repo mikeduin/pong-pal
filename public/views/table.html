@@ -65,10 +65,26 @@
       <span ng-if='vm.activeTeam === 2'>{{vm.t2cupsAvail}}</span>
       cups left to hit. Your rerack options are:
     </div>
-    <div class="row">
+    <div class="row" ng-if="vm.cupsToRack === 9">
       <div class="col s2 offset-s2">
-        NINE CUP
-        <button class="btn btn-splash" ng-click="vm.rackSelect = 'nine-cup'" ng-class="{'btn-selected': vm.rackSelect === 'nine-cup', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='nine-cup'}">NINE-CUP</button>
+        NINE CUP IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === '9-cup' ? vm.rackSelect = null : vm.rackSelect = '9-cup'" ng-class="{'btn-selected': vm.rackSelect === '9-cup', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='9-cup'}">9-CUP</button>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.cupsToRack === 8">
+      <div class="col s2 offset-s2">
+        8-CUP-W IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === '8-cup-W' ? vm.rackSelect = null : vm.rackSelect = '8-cup-W'" ng-class="{'btn-selected': vm.rackSelect === '8-cup-W', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='8-cup-W'}">8-CUP-W</button>
+      </div>
+      <div class="col s2 offset-s1">
+        8-CUP-E IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === '8-cup-E' ? vm.rackSelect = null : vm.rackSelect = '8-cup-E'" ng-class="{'btn-selected': vm.rackSelect === '8-cup-E', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='8-cup-E'}">8-CUP-E</button>
+      </div>
+    </div>
+    <div class="row" ng-if="vm.cupsToRack === 7">
+      <div class="col s2 offset-s2">
+        HEAVY-BASE IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === 'heavy-base' ? vm.rackSelect = null : vm.rackSelect = 'heavy-base'" ng-class="{'btn-selected': vm.rackSelect === 'heavy-base', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='heavy-base'}">HEAVY-BASE</button>
       </div>
     </div>
     <div class="row center-align subm-row">

@@ -58,86 +58,101 @@ function swap (arr, ind1, ind2) {
   arr[ind2] = x;
 }
 
-
 function bubbleSort(arr) {
   for (var i=0; i<arr.length; i++) {
     for (var j=i+1; j<arr.length; j++) {
       if (arr[i]>arr[j]) {
         swap (arr, i, j);
-      }
-      console.log(arr);
-    }
-  }
-  return arr;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function selectionSort(arr) {
-  for (var i=0; i<arr.length; i++) {
-    var currentMin = arr[i];
-    var minIndex = i;
-    for (var j=i+1; j<arr.length; j++) {
-      if (arr[j] < currentMin) {
-        currentMin = arr[j];
-        minIndex = j;
-      }
+      };
     };
-    swap(arr, i, minIndex);
-  }
+  };
   return arr;
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function selectionSort (arr) {
+  for (var i=0; i<arr.length; i++) {
+    var min = i;
+    for (var j=i+1; j<arr.length; j++) {
+      if (arr[j] < arr[min]) {
+        min = j;
+      };
+    };
+    var temp = arr[i];
+    arr[i] = arr[min];
+    arr[min] = temp;
+  };
+  return arr;
+};
 
 function insertionSort(arr) {
-  for (var i=1; i<arr.length; i++) {
-    
+  for (var i=0; i<arr.length; i++) {
+    var tmp = arr[i];
+    for (var j=i-1; j>=0 && (arr[j]>tmp); j--) {
+      arr[j+1] = arr[j];
+    };
+    arr[j+1] = tmp;
+  };
+  return arr;
+};
+
+function merge (arr1, arr2) {
+  var newArr = [];
+  var i = 0;
+  var j = 0;
+
+  while (i<arr1.length && j<arr2.length) {
+    if (arr1[i]<arr2[j]) {
+      newArr.push(arr1[i]);
+      i++;
+    } else {
+      newArr.push(arr2[j]);
+      j++;
+    }
+  };
+
+  return newArr.concat(arr1.slice(i)).concat(arr2.slice(j));
+}
+
+
+
+function mergeSort (arr) {
+  if (arr.length<2) {
+    return arr
+  };
+
+  var mid = Math.floor(arr.length/2);
+  var arr1 = arr.slice(0, mid);
+  var arr2 = arr.slice(mid, arr.length);
+
+  return merge(mergeSort(arr1), mergeSort(arr2));
+}
+
+function swap (arr, i, j) {
+  var temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+
+
+function partition (arr, left, right) {
+  var pivot = arr[Math.floor(arr.length/2)];
+  i = left;
+  j = right;
+  while (i<=j){
+    while (arr[i]<pivot) {
+      i++;
+    };
+
+    while (arr[j]>pivot) {
+      j--
+    };
+
+    if (i <= j) {
+      swap(arr, i, j);
+      i++;
+      j--;
+    }
   }
+
+  return i;
 }
