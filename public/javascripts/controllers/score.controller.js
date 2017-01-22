@@ -64,13 +64,18 @@ function ScoreController () {
       vm.showCups[side+'2'] = false;
       vm.activeTeam === 1 ? vm.t1activeRack = '8-cup-E' : vm.t2activeRack = '8-cup-E';
     };
-    if (vm.rackSelect === 'heavy-base') {
+    if (vm.rackSelect === 'base-seven') {
       vm.showCups[side+'1'] = false;
       vm.showCups[side+'2'] = false;
       vm.showCups[side+'3'] = false;
-      vm.activeTeam === 1 ? vm.t1activeRack = 'heavy-base' : vm.t2activeRack = 'heavy-base';
+      vm.activeTeam === 1 ? vm.t1activeRack = 'base-seven' : vm.t2activeRack = 'base-seven';
     };
-
+    if (vm.rackSelect === 'tri-tip') {
+      vm.showCups[side+'2'] = false;
+      vm.showCups[side+'6'] = false;
+      vm.showCups[side+'10'] = false;
+      vm.activeTeam === 1 ? vm.t1activeRack = 'tri-tip' : vm.t2activeRack = 'tri-tip';
+    };
 
 
     //last
