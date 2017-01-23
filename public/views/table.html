@@ -131,6 +131,16 @@
         <button class="btn btn-splash" ng-click="vm.rackSelect === 'diamond+NE' ? vm.rackSelect = null : vm.rackSelect = 'diamond+NE'" ng-class="{'btn-selected': vm.rackSelect === 'diamond+NE', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='diamond+NE'}">DIAMOND+NE</button>
       </div>
     </div>
+    <div class="row" ng-if="vm.cupsToRack === 5">
+      <div class="col s2">
+        DIAMOND+SW IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === 'diamond+SW' ? vm.rackSelect = null : vm.rackSelect = 'diamond+SW'" ng-class="{'btn-selected': vm.rackSelect === 'diamond+SW', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='diamond+SW'}">DIAMOND+SW</button>
+      </div>
+      <div class="col s2">
+        DIAMOND+SE IMG
+        <button class="btn btn-splash" ng-click="vm.rackSelect === 'diamond+SE' ? vm.rackSelect = null : vm.rackSelect = 'diamond+SE'" ng-class="{'btn-selected': vm.rackSelect === 'diamond+SE', 'disabled': vm.rackSelect !== null && vm.rackSelect !=='diamond+SE'}">DIAMOND+SE</button>
+      </div>
+    </div>
     <div class="row center-align subm-row">
       <button class="btn waves-effect btn-submit" ng-click="vm.rerack()">SUBMIT</button>
     </div>
@@ -216,13 +226,13 @@
       </div>
       <div class="col s6" ng-class="{'cup-disabled': vm.activeTeam === 2}" id="table-right">
         <div class="col right-back">
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r10') : null" ng-class="{'cup-active': vm.activeCup === 'r10', 'cup-bonus': vm.bonusCups['r10'], 'hidden': vm.showCups['r10'] === false}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r10') : null" ng-class="{'cup-active': vm.activeCup === 'r10', 'cup-bonus': vm.bonusCups['r10'], 'hidden': vm.showCups['r10'] === false}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE' || vm.t1activeRack === 'diamond+SW' || vm.t1activeRack === 'diamond+SE'">
             10
           </div>
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r9') : null" ng-class="{'cup-active': vm.activeCup === 'r9', 'cup-bonus': vm.bonusCups['r9'], 'hidden': vm.showCups['r9'] === false}" ng-hide="vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r9') : null" ng-class="{'cup-active': vm.activeCup === 'r9', 'cup-bonus': vm.bonusCups['r9'], 'hidden': vm.showCups['r9'] === false}" ng-hide="vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE' || vm.t1activeRack === 'diamond+SW' || vm.t1activeRack === 'diamond+SE'">
             9
           </div>
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r8') : null" ng-class="{'cup-active': vm.activeCup === 'r8', 'cup-bonus': vm.bonusCups['r8'], 'hidden': vm.showCups['r8'] === false}" ng-hide="vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r8') : null" ng-class="{'cup-active': vm.activeCup === 'r8', 'cup-bonus': vm.bonusCups['r8'], 'hidden': vm.showCups['r8'] === false, 'push-w': vm.t1activeRack === 'diamond+SW', 'push-e': vm.t1activeRack === 'diamond+SE'}" ng-hide="vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
             8
           </div>
           <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r7') : null" ng-class="{'cup-active': vm.activeCup === 'r7', 'cup-bonus': vm.bonusCups['r7'], 'hidden': vm.showCups['r7'] === false}">
@@ -230,7 +240,7 @@
           </div>
         </div>
         <div class="col right-mid-back">
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r6') : null" ng-class="{'cup-active': vm.activeCup === 'r6', 'cup-bonus': vm.bonusCups['r6'], 'hidden': vm.showCups['r6'] === false}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r6') : null" ng-class="{'cup-active': vm.activeCup === 'r6', 'cup-bonus': vm.bonusCups['r6'], 'hidden': vm.showCups['r6'] === false}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE' || vm.t1activeRack === 'diamond+SW' || vm.t1activeRack === 'diamond+SE'">
             6
           </div>
           <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r5') : null" ng-class="{'cup-active': vm.activeCup === 'r5', 'cup-bonus': vm.bonusCups['r5'], 'hidden': vm.showCups['r5'] === false}" ng-hide="vm.t1activeRack === 'excalibur-inv' || vm.t1activeRack === 'tower'">
@@ -241,7 +251,7 @@
           </div>
         </div>
         <div class="col right-mid-front">
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r3') : null" ng-class="{'cup-active': vm.activeCup === 'r3', 'cup-bonus': vm.bonusCups['r3'], 'hidden': vm.showCups['r3'] === false, 'push-w': vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'diamond+NW', 'push-e': vm.t1activeRack === 'tri+NE' || vm.t1activeRack === 'diamond+NE', 'push-n': vm.t1activeRack === '3-2-2'}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'tower'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r3') : null" ng-class="{'cup-active': vm.activeCup === 'r3', 'cup-bonus': vm.bonusCups['r3'], 'hidden': vm.showCups['r3'] === false, 'push-w': vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'diamond+NW', 'push-e': vm.t1activeRack === 'tri+NE' || vm.t1activeRack === 'diamond+NE', 'push-n': vm.t1activeRack === '3-2-2'}" ng-hide="vm.t1activeRack === 'tri-tip' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'tower' || vm.t1activeRack === 'diamond+SW' || vm.t1activeRack === 'diamond+SE'">
             3
           </div>
           <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r2') : null" ng-class="{'cup-active': vm.activeCup === 'r2', 'cup-bonus': vm.bonusCups['r2'], 'hidden': vm.showCups['r2'] === false, 'push-n': vm.t1activeRack === '3-2-2' || vm.t1activeRack === 'tower'}" >
@@ -249,7 +259,7 @@
           </div>
         </div>
         <div class="col right-front">
-          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r1') : null" ng-class="{'cup-active': vm.activeCup === 'r1', 'cup-bonus': vm.bonusCups['r1'], 'hidden': vm.showCups['r1'] === false, 'push-n': vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'tower'}" ng-hide="vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE'">
+          <div class="cup" ng-click="vm.activeTeam === 1 ? vm.cupClick('r1') : null" ng-class="{'cup-active': vm.activeCup === 'r1', 'cup-bonus': vm.bonusCups['r1'], 'hidden': vm.showCups['r1'] === false, 'push-n': vm.t1activeRack === 'tri-tip' || vm.t1activeRack === 'excalibur' || vm.t1activeRack === 'tower'}" ng-hide="vm.t1activeRack === 'tri+NW' || vm.t1activeRack === 'tri+NE' || vm.t1activeRack === '3-2-2' || vm.t1activeRack === '6-cup' || vm.t1activeRack === 'diamond+NW' || vm.t1activeRack === 'diamond+NE' || vm.t1activeRack === 'diamond+SW' || vm.t1activeRack === 'diamond+SE'">
             1
           </div>
         </div>
