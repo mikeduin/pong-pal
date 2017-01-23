@@ -70,8 +70,16 @@ a {
   color: white;
 }
 
-.front-extend {
+.push-forward {
   margin-right: 10px;
+}
+
+.tri-nw {
+  margin-top: 60px;
+}
+
+.tri-ne {
+  margin-top: -60px;
 }
 
 /*LEFTSIDE TABLE STYLES*/

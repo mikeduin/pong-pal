@@ -53,29 +53,23 @@ function ScoreController () {
     if (vm.rackSelect === '9-cup') {
       vm.showCups[side+'1'] = false;
       vm.activeTeam === 1 ? vm.t1activeRack = '9-cup' : vm.t2activeRack = '9-cup';
-    };
-    if (vm.rackSelect === '8-cup-W') {
+    } else if (vm.rackSelect === '8-cup-W') {
       vm.showCups[side+'1'] = false;
       vm.showCups[side+'3'] = false;
       vm.activeTeam === 1 ? vm.t1activeRack = '8-cup-W' : vm.t2activeRack = '8-cup-W';
-    };
-    if (vm.rackSelect === '8-cup-E') {
+    } else if (vm.rackSelect === '8-cup-E') {
       vm.showCups[side+'1'] = false;
       vm.showCups[side+'2'] = false;
       vm.activeTeam === 1 ? vm.t1activeRack = '8-cup-E' : vm.t2activeRack = '8-cup-E';
-    };
-    if (vm.rackSelect === 'base-seven') {
+    } else if (vm.rackSelect === 'base-seven') {
       vm.showCups[side+'1'] = false;
       vm.showCups[side+'2'] = false;
       vm.showCups[side+'3'] = false;
       vm.activeTeam === 1 ? vm.t1activeRack = 'base-seven' : vm.t2activeRack = 'base-seven';
-    };
-    if (vm.rackSelect === 'tri-tip') {
-      vm.showCups[side+'2'] = false;
-      vm.showCups[side+'6'] = false;
-      vm.showCups[side+'10'] = false;
-      vm.activeTeam === 1 ? vm.t1activeRack = 'tri-tip' : vm.t2activeRack = 'tri-tip';
-    };
+    } else {
+      // cups are hidden with table.html to ensure proper centering
+      vm.activeTeam === 1 ? vm.t1activeRack = vm.rackSelect : vm.t2activeRack = vm.rackSelect
+    }
 
 
     //last
