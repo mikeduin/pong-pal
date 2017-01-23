@@ -70,15 +70,15 @@ a {
   color: white;
 }
 
-.push-forward {
+.push-n {
   margin-right: 10px;
 }
 
-.tri-nw {
+.push-w {
   margin-top: 60px;
 }
 
-.tri-ne {
+.push-e {
   margin-top: -60px;
 }
 
